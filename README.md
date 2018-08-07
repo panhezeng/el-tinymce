@@ -10,6 +10,8 @@
 
 基于tinymce富文本编辑器和element-ui组件库开发，tinymce使用的是@panhezeng/vue-tinymce模块，风格模仿微信公众号后台的富文本编辑器，增加了资源侧边栏。
 
+如有定制需要，可以fork自行修改，建议阅读tinymce和element-ui等相关文档
+
 首先请按element-ui官方文档安装element-ui，确保能正常使用element-ui
 
 index.vue
