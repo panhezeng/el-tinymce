@@ -206,8 +206,7 @@ npm run dev:example
 npm run build
 
 # 发版
-npm version patch
-npm publish --access public
+npm version patch && npm publish --access public
 
 ```
 
