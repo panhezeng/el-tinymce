@@ -2,7 +2,7 @@ export const ElTinymce = require('./ElTinymce/index.vue').default
 
 let Vue
 
-function install (_Vue) {
+function install (_Vue, options = (typeof window !== 'undefined' && window.ElSingleUploadOptions)) {
 
   if (Vue) {
     console.warn('[ElTinymce] already installed. Vue.use(ElTinymce) should be called only once.')
@@ -10,6 +10,15 @@ function install (_Vue) {
   }
 
   Vue = _Vue
+
+  if (Object.prototype.toString.call(options) === '[object Object]') {
+    if (Object.prototype.toString.call(options.upload) === '[object Function]') {
+      Object.assign(ElTinymce.props.upload, {
+        required: false,
+        default: options.upload
+      })
+    }
+  }
 
   Vue.component(ElTinymce.name, ElTinymce)
 }

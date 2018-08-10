@@ -41,7 +41,12 @@ index.vue
         default: false
       },
       // tinymce配置
-      config: Object
+      config: Object,
+      // 上传文件的方法
+      upload: {
+        required: true,
+        type: Function
+      }
     },
   }
 </script>
@@ -117,6 +122,9 @@ Side.vue
 
 ## 用法
 
+如果不希望每次使用组件时都显式传入upload prop，则可以在全局注册组件前，通过Vue.use方式安装组件，给use传第二个参数，或者直接赋值window.ElSingleUploadOptions，数据结构要求{upload:foo}。upload是上传接口方法，这样后面多处使用该组件实例时就不需要显式传入upload prop了。
+还有一种方法，就是再包一层，在包裹js里，直接修改此组件的props，其他地方使用修改后的组件
+
 ### internal vue element-ui 方式
 
 `npm i vue element-ui @panhezeng/el-tinymce -S`
@@ -124,7 +132,17 @@ Side.vue
 #### 异步
 ```vue
 <script>
-  const ElTinymce = () => import('@panhezeng/el-tinymce')
+
+    function upload (option){}
+    const ElTinymce = () => {
+      return import('../../dist/el-tinymce.min').then(res => {
+        Object.assign(res.props.upload, {
+          required: false,
+          default: upload
+        })
+        return Promise.resolve(res)
+      })
+    }
  
    export default {
      components: {ElTinymce}

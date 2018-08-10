@@ -3,7 +3,7 @@
     <vue-tinymce class="vue-tinymce" :content.sync="contentInternal"
                  :id="id"
                  :config="configInternal"/>
-    <side v-bind="$attrs" :editor="editor" v-if="!readonly"/>
+    <side v-bind="$attrs" :upload="upload" :editor="editor" v-if="!readonly"/>
   </div>
 </template>
 <script>
@@ -37,7 +37,12 @@
         default: false
       },
       // tinymce配置
-      config: Object
+      config: Object,
+      // 上传文件的方法
+      upload: {
+        required: true,
+        type: Function
+      }
     },
     data () {
       return {
@@ -61,10 +66,6 @@
         handler: 'setContent'
       },
       contentInternal: 'contentChange'
-    },
-    created () {},
-    mounted () {
-      this.$nextTick(function () {})
     },
     beforeDestroy () {
       this.editor = null

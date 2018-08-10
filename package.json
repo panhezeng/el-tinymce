@@ -26,16 +26,18 @@
   "main": "dist/el-tinymce.min.js",
   "scripts": {
     "dev:example": "webpack-dev-server --mode development --open --hot --config webpack.example.config.js",
-    "build:example": "rm -rf docs && mkdir docs && cp index.html docs && webpack --mode production --config webpack.example.config.js",
+    "build:example": "webpack --mode production --config webpack.example.config.js",
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "@panhezeng/ucloud-ufile": "latest",
     "@panhezeng/el-single-upload": "latest",
     "@panhezeng/vue-tinymce": "latest",
     "element-ui": "latest",
     "vue": "latest"
   },
   "devDependencies": {
+    "@panhezeng/before-run-webpack-plugin": "latest",
     "babel-core": "latest",
     "babel-loader": "latest",
     "babel-plugin-syntax-dynamic-import": "latest",

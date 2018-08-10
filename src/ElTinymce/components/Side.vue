@@ -14,7 +14,7 @@
               <div class="el-tinymce-dialog-desc">{{tab.desc}}</div>
               <el-form :model="tab.formData" :rules="tab.formRules" :ref="tab.formName" label-width="0">
                 <el-form-item label="" prop="content" class="el-tinymce-dialog-upload">
-                  <el-single-upload :url.sync="tab.formData.content"
+                  <el-single-upload :url.sync="tab.formData.content" :upload="upload"
                                     :type="item.type" :size="tab.upload.size" :readonly="true" v-if="tab.upload"/>
                   <el-input v-model="tab.formData.content" v-else/>
                 </el-form-item>
@@ -48,6 +48,7 @@
       'el-button': Button,
       'el-input': Input
     },
+    inheritAttrs: false,
     props: {
       // 整个侧边栏是否显示
       side: {
@@ -107,6 +108,11 @@
             }
           }
         }
+      },
+      // 上传文件的方法
+      upload: {
+        required: true,
+        type: Function
       }
     },
     data () {
@@ -245,13 +251,6 @@
       sideShow () { return this.side && this.editor },
       itemShow () { return {image: this.image, audio: this.audio, video: this.video} }
     },
-    watch: {},
-    created () {
-    },
-    mounted () {
-      this.$nextTick(function () {})
-    },
-    beforeDestroy () {},
     methods: {
       dialogClose (index) {
         // 关闭弹出框
