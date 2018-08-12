@@ -30,10 +30,10 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@panhezeng/el-single-upload": "^1.0.3",
-    "@panhezeng/ucloud-ufile": "^1.0.2",
-    "@panhezeng/vue-tinymce": "^2.0.0",
-    "element-ui": "^2.4.6",
+    "@panhezeng/el-single-upload": "latest",
+    "@panhezeng/ucloud-ufile": "latest",
+    "@panhezeng/vue-tinymce": "latest",
+    "element-ui": "latest",
     "vue": "latest"
   },
   "devDependencies": {
