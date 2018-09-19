@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "modules": false,
         "targets": {
@@ -15,7 +15,7 @@
     ]
   ],
   "plugins": [
-    "syntax-dynamic-import",
-    "transform-runtime"
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-runtime"
   ]
 }

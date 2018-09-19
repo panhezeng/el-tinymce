@@ -20,11 +20,6 @@ index.vue
   export default {
     // 侧边栏属性通过$attrs传入，side 是否显示侧边栏，image，audio，video是否显示对应项目 i18n 国际化
     props: {
-      // 当前页面该编辑器的唯一id，如果只有一个可以用默认值
-      id: {
-        type: String,
-        default: '1'
-      },
       // 父组件通过:content.sync同步富文本编辑器内容
       content: {
         type: String,

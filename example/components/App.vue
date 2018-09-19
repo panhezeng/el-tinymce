@@ -2,6 +2,8 @@
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
     <el-tinymce :content.sync="content"/>
+    <el-tinymce :content.sync="content"/>
+    <el-tinymce :content.sync="content"/>
   </div>
 </template>
 
