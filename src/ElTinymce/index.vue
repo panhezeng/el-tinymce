@@ -2,8 +2,10 @@
   <div class="el-tinymce">
     <vue-tinymce class="vue-tinymce"
                  :content.sync="contentInternal"
-                 :config="configInternal"/>
-    <side v-bind="$attrs" :upload="upload" :editor="editor" v-if="!readonly"/>
+                 :config="configInternal"
+                 v-on="$listeners"
+                 />
+    <side v-bind="$attrs" v-on="$listeners" :upload="upload" :editor="editor" v-if="!readonly"/>
   </div>
 </template>
 <script>
@@ -12,8 +14,9 @@
 
   export default {
     name: 'ElTinymce',
-    components: {VueTinymce, Side},
+    components: { VueTinymce, Side },
     // 侧边栏属性通过$attrs传入，side 是否显示侧边栏，image，audio，video是否显示对应项目 i18n 国际化
+    inheritAttrs: false,
     props: {
       // 父组件通过:content.sync同步富文本编辑器内容
       content: {

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
-    <el-tinymce :content.sync="content"/>
+    <el-tinymce :content.sync="content" @content-change="contentChange"/>
     <el-tinymce :content.sync="content"/>
     <el-tinymce :content.sync="content"/>
   </div>
@@ -38,12 +38,12 @@
 
       const success = (res) => {
         if (Object.prototype.toString.call(res) !== '[object Object]') {
-          res = {Key: file.name}
+          res = { Key: file.name }
         }
         res.url = `http://digital.hammacher.com/${res.Key}`
         ufile.uploading = false
         console.log('success', res)
-        resolve({data: res})
+        resolve({ data: res })
       }
 
       const error = (res) => {
@@ -53,7 +53,7 @@
 
       const progress = (res) => {
         if (Object.prototype.toString.call(res) !== '[object Object]') {
-          res = {value: 0}
+          res = { value: 0 }
         }
         console.log('progress', res)
 //          var tips = ''
@@ -87,10 +87,15 @@
 
   export default {
     name: 'App',
-    components: {ElTinymce},
+    components: { ElTinymce },
     data () {
       return {
         content: ''
+      }
+    },
+    methods: {
+      contentChange (content) {
+        console.log(content, 'contentChange')
       }
     }
   }
