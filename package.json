@@ -52,9 +52,9 @@
     "vue-loader": "latest",
     "vue-style-loader": "latest",
     "vue-template-compiler": "latest",
-    "webpack": "latest",
+    "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "latest"
+    "webpack-dev-server": "^3.1.10"
   },
   "engines": {
     "node": ">= 8.0.0",

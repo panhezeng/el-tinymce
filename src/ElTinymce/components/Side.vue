@@ -15,7 +15,7 @@
               <el-form :model="tab.formData" :rules="tab.formRules" :ref="tab.formName" label-width="0">
                 <el-form-item label="" prop="content" class="el-tinymce-dialog-upload">
                   <el-single-upload :url.sync="tab.formData.content" :upload="upload"
-                                    :type="item.type" :size="tab.upload.size" :readonly="true" v-if="tab.upload"/>
+                                    :type="item.accept" :size="tab.upload.size" :readonly="true" v-if="tab.upload"/>
                   <el-input v-model="tab.formData.content" v-else/>
                 </el-form-item>
                 <el-form-item class="el-tinymce-dialog-btn">
@@ -90,10 +90,10 @@
             externalLinkPictureRule: '请输入有效图片链接',
             audio: '音频',
             localAudio: '本地音频',
-            localAudioDesc: '支持mp3，大小不能超过100M',
+            localAudioDesc: '支持mp3、ogg、wav、flac、aac，大小不能超过100M',
             localAudioRule: '请上传音频',
             externalLinkAudio: '外链音频',
-            externalLinkAudioDesc: '支持mp3',
+            externalLinkAudioDesc: '支持mp3、ogg、wav、flac、aac',
             externalLinkAudioRule: '请输入有效音频链接',
             video: '视频',
             localVideo: '本地视频',
@@ -121,6 +121,7 @@
         list: [
           {
             type: 'image',
+            accept: 'image/*',
             title: this.i18n.picture,
             dialog: {
               activeName: 'image0',
@@ -167,6 +168,7 @@
           },
           {
             type: 'audio',
+            accept: '.mp3,.ogg,.wav,.flac,.aac',
             title: this.i18n.audio,
             dialog: {
               activeName: 'audio0',
@@ -201,7 +203,7 @@
                       required: true,
                       message: this.i18n.externalLinkAudioRule,
                       trigger: 'blur',
-                      pattern: /\.mp3$/
+                      pattern: /\.(mp3|ogg|wav|flac|aac)$/
                     }]
                   }
                 }
@@ -213,6 +215,7 @@
           },
           {
             type: 'video',
+            accept: 'video/*',
             title: this.i18n.video,
             dialog: {
               activeName: 'video0',
@@ -249,12 +252,12 @@
     },
     computed: {
       sideShow () { return this.side && this.editor },
-      itemShow () { return {image: this.image, audio: this.audio, video: this.video} }
+      itemShow () { return { image: this.image, audio: this.audio, video: this.video } }
     },
     methods: {
       dialogClose (index) {
         // 关闭弹出框
-        console.log(this.$refs)
+//        console.log(this.$refs)
         const tabs = this.list[index].dialog.tabs
         tabs.forEach(tab => {
           this.reset(this.$refs[tab.formName][0])
