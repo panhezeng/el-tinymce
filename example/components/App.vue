@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
-    <el-tinymce :content.sync="content" @content-change="contentChange"/>
+    <el-tinymce :content.sync="content" @content-change="contentChange" :i18n="i18n.default()"/>
     <el-tinymce :content.sync="content"/>
     <el-tinymce :content.sync="content"/>
   </div>
@@ -27,27 +27,18 @@
 
     return new Promise((resolve, reject) => {
 
-      if (ufile.uploading) {
-        console.log('上传中，稍等')
-        return
-      } else {
-        ufile.uploading = true
-      }
-
-      ufile.PREFIX = `Items/11933/${file.type}`
+      ufile.PREFIX = `example/${file.type}`
 
       const success = (res) => {
         if (Object.prototype.toString.call(res) !== '[object Object]') {
           res = { Key: file.name }
         }
-        res.url = `http://digital.hammacher.com/${res.Key}`
-        ufile.uploading = false
+        res.url = `http://dummyimage.com/200x100/50B347/FFF&text=${res.Key}`
         console.log('success', res)
         resolve({ data: res })
       }
 
       const error = (res) => {
-        ufile.uploading = false
         reject(new Error('上传失败'))
       }
 
@@ -72,6 +63,40 @@
     })
   }
 
+  const i18n = {
+    type: Object,
+    default () {
+      return {
+        resource: 'Resource',
+        picture: 'Picture',
+        localPicture: 'Local Picture',
+        localPictureDesc: 'Support png, jpg, gif, svg, webp, size cannot exceed 10M',
+        localPictureRule: 'Please upload pictures',
+        externalLinkPicture: 'External Link Picture',
+        externalLinkPictureDesc: 'Support png, jpg, gif, svg, webp',
+        externalLinkPictureRule: 'Please enter valid picture link',
+        audio: 'Audio',
+        localAudio: 'Local Audio',
+        localAudioDesc: 'Support mp3、ogg、wav、flac、aac, size can not exceed 100M',
+        localAudioRule: 'Please upload audio',
+        externalLinkAudio: 'External Link Audio',
+        externalLinkAudioDesc: 'Support mp3、ogg、wav、flac、aac',
+        externalLinkAudioRule: 'Please enter valid audio link',
+        video: 'Video',
+        localVideo: 'Local Video',
+        localVideoDesc: 'Support mp4, size can not exceed 1G',
+        localVideoRule: 'Please upload video',
+        externalLinkVideo: 'External Link Video',
+        externalLinkVideoDesc: 'Support mp4 links and third-party websites to share video iframe code',
+        externalLinkVideoRule: 'Please enter valid video link or code',
+        btn: {
+          reset: '重置',
+          submit: '提交'
+        }
+      }
+    }
+  }
+
   //  window.ElSingleUploadOptions = {upload: upload}
   //  require('../../src')
 
@@ -81,6 +106,9 @@
         required: false,
         default: upload
       })
+
+//      Object.assign(res.components.Side.props.i18n, i18n)
+
       return Promise.resolve(res)
     })
   }
@@ -90,6 +118,7 @@
     components: { ElTinymce },
     data () {
       return {
+        i18n,
         content: ''
       }
     },

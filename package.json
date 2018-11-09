@@ -37,14 +37,14 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.1.5",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/runtime": "^7.1.2",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/runtime": "^7.1.5",
     "@panhezeng/before-run-webpack-plugin": "latest",
     "babel-loader": "^8.0.4",
-    "css-loader": "latest",
+    "css-loader": "^1.0.1",
     "file-loader": "latest",
     "less": "latest",
     "less-loader": "latest",
@@ -52,7 +52,7 @@
     "vue-loader": "latest",
     "vue-style-loader": "latest",
     "vue-template-compiler": "latest",
-    "webpack": "^4.23.1",
+    "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
