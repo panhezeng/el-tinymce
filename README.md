@@ -122,7 +122,7 @@ Side.vue
 
 ### internal vue element-ui 方式
 
-`npm i vue element-ui @panhezeng/el-tinymce -S`
+`npm i vue element-ui tinymce @panhezeng/vue-tinymce @panhezeng/el-single-upload @panhezeng/el-tinymce -S`
 
 #### 异步
 ```vue
@@ -171,12 +171,11 @@ Side.vue
 ### external vue element-ui 方式
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@latest/lib/theme-chalk/index.css">
-<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/element-ui@latest/lib/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@~2/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js"></script>
 ```
 
-`npm i @panhezeng/el-tinymce -S`
+`npm i tinymce @panhezeng/vue-tinymce @panhezeng/el-single-upload @panhezeng/el-tinymce -S`
 
 ```javascript
 // auto install
@@ -185,7 +184,8 @@ import '@panhezeng/el-tinymce'
 or 
 ```html
 <!--auto install-->
-<script src="https://cdn.jsdelivr.net/npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@~2/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js,npm/tinymce@~5/tinymce.min.js,npm/@panhezeng/vue-tinymce@latest/dist/vue-tinymce.min.js,npm/@panhezeng/el-single-upload@latest/dist/el-single-upload.min.js,npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
 ```
 
 ## 编译

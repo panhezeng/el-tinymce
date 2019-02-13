@@ -11,7 +11,8 @@ const config = {
   },
   externals: {
     'vue': 'Vue',
-    'element-ui': 'ELEMENT'
+    'element-ui': 'ELEMENT',
+    '@panhezeng/ucloud-ufile': 'UCloudUFile'
   },
   module: {
     rules: [

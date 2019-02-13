@@ -9,8 +9,18 @@ module.exports = {
     libraryExport: 'ElTinymce'
   },
   externals: {
-    '@panhezeng/vue-tinymce': '@panhezeng/vue-tinymce',
-    '@panhezeng/el-single-upload': '@panhezeng/el-single-upload',
+    '@panhezeng/vue-tinymce': {
+      commonjs: '@panhezeng/vue-tinymce',
+      commonjs2: '@panhezeng/vue-tinymce',
+      amd: '@panhezeng/vue-tinymce',
+      root: 'VueTinymce'
+    },
+    '@panhezeng/el-single-upload': {
+      commonjs: '@panhezeng/el-single-upload',
+      commonjs2: '@panhezeng/el-single-upload',
+      amd: '@panhezeng/el-single-upload',
+      root: 'ElSingleUpload'
+    },
     'vue': 'Vue',
     'element-ui': {
       commonjs: 'element-ui',

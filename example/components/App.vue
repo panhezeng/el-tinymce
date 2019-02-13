@@ -19,7 +19,7 @@
 
   const ufile = new UCloudUFile('example-ucloud', 'https://private-87040-publicexample.apiary-mock.com/upload', 'https://private-87040-publicexample.apiary-mock.com/upload/token')
 
-  function upload (option) {
+  function upload(option) {
     const file = option.file
     if (Object.prototype.toString.call(file) !== '[object File]') {
       throw new Error('file参数必须为File数据类型')
@@ -31,11 +31,11 @@
 
       const success = (res) => {
         if (Object.prototype.toString.call(res) !== '[object Object]') {
-          res = { Key: file.name }
+          res = {Key: file.name}
         }
         res.url = `http://dummyimage.com/200x100/50B347/FFF&text=${res.Key}`
         console.log('success', res)
-        resolve({ data: res })
+        resolve({data: res})
       }
 
       const error = (res) => {
@@ -44,7 +44,7 @@
 
       const progress = (res) => {
         if (Object.prototype.toString.call(res) !== '[object Object]') {
-          res = { value: 0 }
+          res = {value: 0}
         }
         console.log('progress', res)
 //          var tips = ''
@@ -65,7 +65,7 @@
 
   const i18n = {
     type: Object,
-    default () {
+    default() {
       return {
         resource: 'Resource',
         picture: 'Picture',
@@ -115,15 +115,15 @@
 
   export default {
     name: 'App',
-    components: { ElTinymce },
-    data () {
+    components: {ElTinymce},
+    data() {
       return {
         i18n,
         content: ''
       }
     },
     methods: {
-      contentChange (content) {
+      contentChange(content) {
         console.log(content, 'contentChange')
       }
     }

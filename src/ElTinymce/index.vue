@@ -2,6 +2,8 @@
   <div class="el-tinymce">
     <vue-tinymce class="vue-tinymce"
                  :content.sync="contentInternal"
+                 :update-event="updateEvent"
+                 :url="url"
                  :config="configInternal"
                  v-on="$listeners"
                  />
@@ -23,6 +25,23 @@
         type: String,
         required: true
       },
+      // 触发content同步更新的tinymce Editor Events，其他https://www.tiny.cloud/docs/advanced/events/
+      updateEvent: {
+        type: String,
+        default: "beforeaddundo undo redo keyup"
+      },
+      // tinymce依赖文件的cdn url
+      url: {
+        type: String,
+        default: "https://cdn.jsdelivr.net/npm/tinymce@~5"
+      },
+      // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar3，可以使用该组件时写上 :config="{toolbar2:''}"
+      config: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
       // 编辑器高度
       height: {
         type: Number,
@@ -33,8 +52,6 @@
         type: Boolean,
         default: false
       },
-      // tinymce配置
-      config: Object,
       // 上传文件的方法
       upload: {
         required: true,
