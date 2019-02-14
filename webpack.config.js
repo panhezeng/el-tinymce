@@ -1,85 +1,79 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
   output: {
-    filename: 'el-tinymce.min.js',
-    libraryTarget: 'umd',
+    filename: "el-tinymce.min.js",
+    libraryTarget: "umd",
     umdNamedDefine: true,
-    library: 'ElTinymce',
-    libraryExport: 'ElTinymce'
+    library: "ElTinymce",
+    libraryExport: "ElTinymce"
   },
   externals: {
-    '@panhezeng/vue-tinymce': {
-      commonjs: '@panhezeng/vue-tinymce',
-      commonjs2: '@panhezeng/vue-tinymce',
-      amd: '@panhezeng/vue-tinymce',
-      root: 'VueTinymce'
+    "@panhezeng/vue-tinymce": {
+      commonjs: "@panhezeng/vue-tinymce",
+      commonjs2: "@panhezeng/vue-tinymce",
+      amd: "@panhezeng/vue-tinymce",
+      root: "VueTinymce"
     },
-    '@panhezeng/el-single-upload': {
-      commonjs: '@panhezeng/el-single-upload',
-      commonjs2: '@panhezeng/el-single-upload',
-      amd: '@panhezeng/el-single-upload',
-      root: 'ElSingleUpload'
+    "@panhezeng/el-single-upload": {
+      commonjs: "@panhezeng/el-single-upload",
+      commonjs2: "@panhezeng/el-single-upload",
+      amd: "@panhezeng/el-single-upload",
+      root: "ElSingleUpload"
     },
     vue: {
-      root: 'Vue',
-      commonjs: 'vue',
-      commonjs2: 'vue',
-      amd: 'vue'
+      commonjs: "vue",
+      commonjs2: "vue",
+      amd: "vue",
+      root: "Vue"
     },
-    'element-ui': {
-      commonjs: 'element-ui',
-      commonjs2: 'element-ui',
-      amd: 'element-ui',
-      root: 'ELEMENT'
+    "element-ui": {
+      commonjs: "element-ui",
+      commonjs2: "element-ui",
+      amd: "element-ui",
+      root: "ELEMENT"
     }
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: "vue-loader"
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: "babel-loader"
       },
       {
         test: /\.(css|less)$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'less-loader'
-        ]
+        use: ["vue-style-loader", "css-loader", "less-loader"]
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10000,
-          name: 'img/[name].[hash:7].[ext]'
+          name: "img/[name].[hash:7].[ext]"
         }
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10000,
-          name: 'media/[name].[hash:7].[ext]'
+          name: "media/[name].[hash:7].[ext]"
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 10000,
-          name: 'fonts/[name].[hash:7].[ext]'
+          name: "fonts/[name].[hash:7].[ext]"
         }
       }
     ]
   },
-  plugins: [
-    new VueLoaderPlugin()
-  ]
-}
+  plugins: [new VueLoaderPlugin()]
+};
