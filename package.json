@@ -30,15 +30,15 @@
     "build": "webpack --mode production"
   },
   "peerDependencies": {
-    "element-ui": "~2",
-    "@panhezeng/vue-tinymce": "latest",
-    "@panhezeng/el-single-upload": "latest"
+    "vue": "~2",
+    "element-ui": "~2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@panhezeng/vue-tinymce": "~2",
+    "@panhezeng/el-single-upload": "~1"
+  },
   "devDependencies": {
-    "@panhezeng/el-single-upload": "latest",
-    "@panhezeng/ucloud-ufile": "latest",
-    "@panhezeng/vue-tinymce": "latest",
+    "@panhezeng/ucloud-ufile": "~1",
     "tinymce": "~5",
     "element-ui": "~2",
     "vue": "~2",
