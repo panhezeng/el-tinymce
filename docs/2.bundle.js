@@ -421,13 +421,7 @@
                         "side",
                         e._g(
                           e._b(
-                            {
-                              attrs: {
-                                upload: e.upload,
-                                "upload-props": e.uploadProps,
-                                editor: e.editor
-                              }
-                            },
+                            { attrs: { upload: e.upload, editor: e.editor } },
                             "side",
                             e.$attrs,
                             !1
