@@ -129,7 +129,11 @@
             n("h1", [e._v("上传的mock演示，response永远是一样的数据")]),
             e._v(" "),
             n("el-tinymce", {
-              attrs: { content: e.content, i18n: e.i18n.default() },
+              attrs: {
+                content: e.content,
+                i18n: e.i18n.default(),
+                "upload-props": { tip: "tip" }
+              },
               on: {
                 "update:content": function(t) {
                   e.content = t;

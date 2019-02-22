@@ -12,6 +12,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       :upload="upload"
+      :upload-props="uploadProps"
       :editor="editor"
       v-if="!readonly"
     />

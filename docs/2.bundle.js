@@ -171,8 +171,8 @@
               c = !1,
               u = function() {},
               d = null,
-              m = "data-vue-ssr-id",
-              p =
+              p = "data-vue-ssr-id",
+              m =
                 "undefined" != typeof navigator &&
                 /msie [6-9]\b/.test(navigator.userAgent.toLowerCase());
             function f(e, t, n, o) {
@@ -224,12 +224,12 @@
             function h(e) {
               var t,
                 n,
-                i = document.querySelector("style[" + m + '~="' + e.id + '"]');
+                i = document.querySelector("style[" + p + '~="' + e.id + '"]');
               if (i) {
                 if (c) return u;
                 i.parentNode.removeChild(i);
               }
-              if (p) {
+              if (m) {
                 var o = s++;
                 (i = l || (l = y())),
                   (t = x.bind(null, i, o, !1)),
@@ -242,7 +242,7 @@
                       o = t.sourceMap;
                     if (
                       (i && e.setAttribute("media", i),
-                      d.ssrId && e.setAttribute(m, t.id),
+                      d.ssrId && e.setAttribute(p, t.id),
                       o &&
                         ((n += "\n/*# sourceURL=" + o.sources[0] + " */"),
                         (n +=
@@ -421,7 +421,13 @@
                         "side",
                         e._g(
                           e._b(
-                            { attrs: { upload: e.upload, editor: e.editor } },
+                            {
+                              attrs: {
+                                upload: e.upload,
+                                "upload-props": e.uploadProps,
+                                editor: e.editor
+                              }
+                            },
                             "side",
                             e.$attrs,
                             !1
@@ -542,28 +548,38 @@
                                                   },
                                                   [
                                                     i.upload
-                                                      ? n("el-single-upload", {
-                                                          attrs: {
-                                                            url:
-                                                              i.formData
-                                                                .content,
-                                                            upload: e.upload,
-                                                            type: t.accept,
-                                                            size: i.upload.size,
-                                                            readonly: !0
-                                                          },
-                                                          on: {
-                                                            "update:url": function(
-                                                              t
-                                                            ) {
-                                                              return e.$set(
-                                                                i.formData,
-                                                                "content",
-                                                                t
-                                                              );
-                                                            }
-                                                          }
-                                                        })
+                                                      ? n(
+                                                          "el-single-upload",
+                                                          e._b(
+                                                            {
+                                                              attrs: {
+                                                                url:
+                                                                  i.formData
+                                                                    .content,
+                                                                upload:
+                                                                  e.upload,
+                                                                type: t.accept,
+                                                                size:
+                                                                  i.upload.size,
+                                                                readonly: !0
+                                                              },
+                                                              on: {
+                                                                "update:url": function(
+                                                                  t
+                                                                ) {
+                                                                  return e.$set(
+                                                                    i.formData,
+                                                                    "content",
+                                                                    t
+                                                                  );
+                                                                }
+                                                              }
+                                                            },
+                                                            "el-single-upload",
+                                                            e.uploadProps,
+                                                            !1
+                                                          )
+                                                        )
                                                       : n("el-input", {
                                                           model: {
                                                             value:
@@ -721,7 +737,13 @@
                       };
                     }
                   },
-                  upload: { required: !0, type: Function }
+                  upload: { required: !0, type: Function },
+                  uploadProps: {
+                    type: Object,
+                    default: function() {
+                      return {};
+                    }
+                  }
                 },
                 data: function() {
                   return {
@@ -945,10 +967,10 @@
             var u = c(s, o, [], !1, null, null, null);
             u.options.__file = "src/ElTinymce/components/Side.vue";
             var d = u.exports,
-              m = n(6),
-              p = {
+              p = n(6),
+              m = {
                 name: "ElTinymce",
-                components: { VueTinymce: n.n(m).a, Side: d },
+                components: { VueTinymce: n.n(p).a, Side: d },
                 inheritAttrs: !1,
                 props: {
                   content: { type: String, required: !0 },
@@ -1008,7 +1030,7 @@
                   }
                 }
               },
-              f = (n(12), c(p, i, [], !1, null, null, null));
+              f = (n(12), c(m, i, [], !1, null, null, null));
             (f.options.__file = "src/ElTinymce/index.vue"),
               (t.default = f.exports);
           }

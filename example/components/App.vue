@@ -5,6 +5,7 @@
       :content.sync="content"
       @content-change="contentChange"
       :i18n="i18n.default()"
+      :upload-props="{ tip: 'tip' }"
     />
     <el-tinymce :content.sync="content" />
     <el-tinymce :content.sync="content" />

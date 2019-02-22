@@ -41,6 +41,7 @@
                     :type="item.accept"
                     :size="tab.upload.size"
                     :readonly="true"
+                    v-bind="uploadProps"
                     v-if="tab.upload"
                   />
                   <el-input v-model="tab.formData.content" v-else />
@@ -159,6 +160,12 @@ export default {
     upload: {
       required: true,
       type: Function
+    },
+    uploadProps: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
   data() {
