@@ -6,9 +6,16 @@
       @content-change="contentChange"
       :i18n="i18n.default()"
       :upload-props="{ tip: 'tip' }"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
     />
-    <el-tinymce :content.sync="content" />
-    <el-tinymce :content.sync="content" />
+    <el-tinymce
+      :content.sync="content"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+    />
+    <el-tinymce
+      :content.sync="content"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+    />
   </div>
 </template>
 
