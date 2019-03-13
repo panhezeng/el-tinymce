@@ -4,7 +4,6 @@
     <el-tinymce
       :content.sync="content"
       @content-change="contentChange"
-      :i18n="i18n.default()"
       :upload-props="{ tip: 'tip' }"
       url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
     />
@@ -13,6 +12,9 @@
       url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
     />
     <el-tinymce
+      :i18n="i18n"
+      :list="list"
+      :upload-props="uploadProps"
       :content.sync="content"
       url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
     />
@@ -79,40 +81,175 @@ function upload(option) {
 }
 
 const i18n = {
-  type: Object,
-  default() {
-    return {
-      resource: "Resource",
-      picture: "Picture",
-      localPicture: "Local Picture",
-      localPictureDesc:
-        "Support png, jpg, gif, svg, webp, size cannot exceed 10M",
-      localPictureRule: "Please upload pictures",
-      externalLinkPicture: "External Link Picture",
-      externalLinkPictureDesc: "Support png, jpg, gif, svg, webp",
-      externalLinkPictureRule: "Please enter valid picture link",
-      audio: "Audio",
-      localAudio: "Local Audio",
-      localAudioDesc:
-        "Support mp3、ogg、wav、flac、aac, size can not exceed 100M",
-      localAudioRule: "Please upload audio",
-      externalLinkAudio: "External Link Audio",
-      externalLinkAudioDesc: "Support mp3、ogg、wav、flac、aac",
-      externalLinkAudioRule: "Please enter valid audio link",
-      video: "Video",
-      localVideo: "Local Video",
-      localVideoDesc: "Support mp4, size can not exceed 1G",
-      localVideoRule: "Please upload video",
-      externalLinkVideo: "External Link Video",
-      externalLinkVideoDesc:
-        "Support mp4 links and third-party websites to share video iframe code",
-      externalLinkVideoRule: "Please enter valid video link or code",
-      btn: {
-        reset: "重置",
-        submit: "提交"
-      }
-    };
+  resource: "Resource",
+  btn: {
+    reset: "reset",
+    submit: "submit"
   }
+};
+
+const list = [
+  {
+    type: "image",
+    accept: "image/*",
+    title: "Picture",
+    dialog: {
+      activeName: "image0",
+      tabs: [
+        {
+          title: "Local Picture",
+          desc: "Support png, jpg, gif, svg, webp, size cannot exceed 10M",
+          upload: {
+            size: 10240
+          },
+          formName: "image0",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please upload pictures",
+                trigger: "blur"
+              }
+            ]
+          }
+        },
+        {
+          title: "External Link Picture",
+          desc: "Support png, jpg, gif, svg, webp",
+          formName: "image1",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please enter valid picture link",
+                trigger: "blur",
+                pattern: /\.(png|jpe?g|gif|svg|webp)$/
+              }
+            ]
+          }
+        }
+      ],
+      template(content) {
+        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${content}"></p>`;
+      }
+    }
+  },
+  {
+    type: "audio",
+    accept: ".mp3,.ogg,.wav,.flac,.aac",
+    title: "Audio",
+    dialog: {
+      activeName: "audio0",
+      tabs: [
+        {
+          title: "Local Audio",
+          desc: "Support mp3|ogg|wav|flac|aac, size can not exceed 100M",
+          upload: {
+            size: 102400
+          },
+          formName: "audio0",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please upload audio",
+                trigger: "blur"
+              }
+            ]
+          }
+        },
+        {
+          title: "External Link Audio",
+          desc: "Support mp3|ogg|wav|flac|aac",
+          formName: "audio1",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please enter valid audio link",
+                trigger: "blur",
+                pattern: /\.(mp3|ogg|wav|flac|aac)$/
+              }
+            ]
+          }
+        }
+      ],
+      template(content) {
+        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${content}" controls></audio></p>`;
+      }
+    }
+  },
+  {
+    type: "video",
+    accept: ".mp4,.webm",
+    title: "Video",
+    dialog: {
+      activeName: "video0",
+      tabs: [
+        {
+          title: "Local Video",
+          desc: "Support mp4, size can not exceed 1G",
+          upload: {
+            size: 1048576
+          },
+          formName: "video0",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please upload video",
+                trigger: "blur"
+              }
+            ]
+          }
+        },
+        {
+          title: "External Link Video",
+          desc:
+            "Support mp4|webm links and third-party websites to share video iframe code",
+          formName: "video1",
+          formData: {
+            content: ""
+          },
+          formRules: {
+            content: [
+              {
+                required: true,
+                message: "Please enter valid video link or code",
+                trigger: "blur",
+                pattern: /\.(mp4|webm)|<\/iframe>$/
+              }
+            ]
+          }
+        }
+      ],
+      template(content) {
+        if (/\.(mp4|webm)$/.test(content)) {
+          content = `<video src="${content}" controls></video>`;
+        }
+        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${content}</p>`;
+      }
+    }
+  }
+];
+
+const uploadProps = {
+  placeholder: "File link"
 };
 
 //  window.ElSingleUploadOptions = {upload: upload}
@@ -137,6 +274,8 @@ export default {
   data() {
     return {
       i18n,
+      list,
+      uploadProps,
       content: ""
     };
   },

@@ -36,15 +36,15 @@
                   class="el-tinymce-dialog-upload"
                 >
                   <el-single-upload
+                    v-if="tab.upload"
                     :url.sync="tab.formData.content"
                     :upload="upload"
-                    :type="item.accept"
+                    :accept="item.accept"
                     :size="tab.upload.size"
                     :readonly="true"
                     v-bind="uploadProps"
-                    v-if="tab.upload"
                   />
-                  <el-input v-model="tab.formData.content" v-else />
+                  <el-input v-else v-model="tab.formData.content" />
                 </el-form-item>
                 <el-form-item class="el-tinymce-dialog-btn">
                   <el-button @click="reset($refs[tab.formName][0])">{{
@@ -128,32 +128,175 @@ export default {
       default() {
         return {
           resource: "资源",
-          picture: "图片",
-          localPicture: "本地图片",
-          localPictureDesc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
-          localPictureRule: "请上传图片",
-          externalLinkPicture: "外链图片",
-          externalLinkPictureDesc: "支持png、jpg、gif、svg、webp",
-          externalLinkPictureRule: "请输入有效图片链接",
-          audio: "音频",
-          localAudio: "本地音频",
-          localAudioDesc: "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
-          localAudioRule: "请上传音频",
-          externalLinkAudio: "外链音频",
-          externalLinkAudioDesc: "支持mp3、ogg、wav、flac、aac",
-          externalLinkAudioRule: "请输入有效音频链接",
-          video: "视频",
-          localVideo: "本地视频",
-          localVideoDesc: "支持mp4，大小不能超过1G",
-          localVideoRule: "请上传视频",
-          externalLinkVideo: "外链视频",
-          externalLinkVideoDesc: "支持mp4链接和第三方网站分享视频iframe代码",
-          externalLinkVideoRule: "请输入有效视频链接或代码",
           btn: {
             reset: "重置",
             submit: "提交"
           }
         };
+      }
+    },
+    // 资源列表，dialog是该资源的弹出框数据
+    list: {
+      type: Array,
+      default() {
+        return [
+          {
+            type: "image",
+            accept: "image/*",
+            title: "图片",
+            dialog: {
+              activeName: "image0",
+              tabs: [
+                {
+                  title: "本地图片",
+                  desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
+                  upload: {
+                    size: 10240
+                  },
+                  formName: "image0",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请上传图片",
+                        trigger: "blur"
+                      }
+                    ]
+                  }
+                },
+                {
+                  title: "外链图片",
+                  desc: "支持png、jpg、gif、svg、webp",
+                  formName: "image1",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请输入有效图片链接",
+                        trigger: "blur",
+                        pattern: /\.(png|jpe?g|gif|svg|webp)$/
+                      }
+                    ]
+                  }
+                }
+              ],
+              template(content) {
+                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${content}"></p>`;
+              }
+            }
+          },
+          {
+            type: "audio",
+            accept: ".mp3,.ogg,.wav,.flac,.aac",
+            title: "音频",
+            dialog: {
+              activeName: "audio0",
+              tabs: [
+                {
+                  title: "本地音频",
+                  desc: "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
+                  upload: {
+                    size: 102400
+                  },
+                  formName: "audio0",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请上传音频",
+                        trigger: "blur"
+                      }
+                    ]
+                  }
+                },
+                {
+                  title: "外链音频",
+                  desc: "支持mp3、ogg、wav、flac、aac",
+                  formName: "audio1",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请输入有效音频链接",
+                        trigger: "blur",
+                        pattern: /\.(mp3|ogg|wav|flac|aac)$/
+                      }
+                    ]
+                  }
+                }
+              ],
+              template(content) {
+                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${content}" controls></audio></p>`;
+              }
+            }
+          },
+          {
+            type: "video",
+            accept: ".mp4,.webm",
+            title: "视频",
+            dialog: {
+              activeName: "video0",
+              tabs: [
+                {
+                  title: "本地视频",
+                  desc: "支持mp4、webm，大小不能超过1G",
+                  upload: {
+                    size: 1048576
+                  },
+                  formName: "video0",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请上传视频",
+                        trigger: "blur"
+                      }
+                    ]
+                  }
+                },
+                {
+                  title: "外链视频",
+                  desc: "支持mp4、webm链接和第三方网站分享视频iframe代码",
+                  formName: "video1",
+                  formData: {
+                    content: ""
+                  },
+                  formRules: {
+                    content: [
+                      {
+                        required: true,
+                        message: "请输入有效视频链接或代码",
+                        trigger: "blur",
+                        pattern: /\.(mp4|webm)|<\/iframe>$/
+                      }
+                    ]
+                  }
+                }
+              ],
+              template(content) {
+                if (/\.(mp4|webm)$/.test(content)) {
+                  content = `<video src="${content}" controls></video>`;
+                }
+                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${content}</p>`;
+              }
+            }
+          }
+        ];
       }
     },
     // 上传文件的方法
@@ -170,145 +313,6 @@ export default {
   },
   data() {
     return {
-      // 资源列表，dialog是该资源的弹出框数据
-      list: [
-        {
-          type: "image",
-          accept: "image/*",
-          title: this.i18n.picture,
-          dialog: {
-            activeName: "image0",
-            tabs: [
-              {
-                title: this.i18n.localPicture,
-                desc: this.i18n.localPictureDesc,
-                upload: {
-                  size: 10240
-                },
-                formName: "image0",
-                formData: {
-                  content: ""
-                },
-                formRules: {
-                  content: [
-                    {
-                      required: true,
-                      message: this.i18n.localPictureRule,
-                      trigger: "blur"
-                    }
-                  ]
-                }
-              },
-              {
-                title: this.i18n.externalLinkPicture,
-                desc: this.i18n.externalLinkPictureDesc,
-                formName: "image1",
-                formData: {
-                  content: ""
-                },
-                formRules: {
-                  content: [
-                    {
-                      required: true,
-                      message: this.i18n.externalLinkPictureRule,
-                      trigger: "blur",
-                      pattern: /\.(png|jpe?g|gif|svg|webp)$/
-                    }
-                  ]
-                }
-              }
-            ],
-            template(content) {
-              return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${content}"></p>`;
-            }
-          }
-        },
-        {
-          type: "audio",
-          accept: ".mp3,.ogg,.wav,.flac,.aac",
-          title: this.i18n.audio,
-          dialog: {
-            activeName: "audio0",
-            tabs: [
-              {
-                title: this.i18n.localAudio,
-                desc: this.i18n.localAudioDesc,
-                upload: {
-                  size: 102400
-                },
-                formName: "audio0",
-                formData: {
-                  content: ""
-                },
-                formRules: {
-                  content: [
-                    {
-                      required: true,
-                      message: this.i18n.localAudioRule,
-                      trigger: "blur"
-                    }
-                  ]
-                }
-              },
-              {
-                title: this.i18n.externalLinkAudio,
-                desc: this.i18n.externalLinkAudioDesc,
-                formName: "audio1",
-                formData: {
-                  content: ""
-                },
-                formRules: {
-                  content: [
-                    {
-                      required: true,
-                      message: this.i18n.externalLinkAudioRule,
-                      trigger: "blur",
-                      pattern: /\.(mp3|ogg|wav|flac|aac)$/
-                    }
-                  ]
-                }
-              }
-            ],
-            template(content) {
-              return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${content}" controls></audio></p>`;
-            }
-          }
-        },
-        {
-          type: "video",
-          accept: "video/*",
-          title: this.i18n.video,
-          dialog: {
-            activeName: "video0",
-            tabs: [
-              {
-                title: this.i18n.externalLinkVideo,
-                desc: this.i18n.externalLinkVideoDesc,
-                formName: "video0",
-                formData: {
-                  content: ""
-                },
-                formRules: {
-                  content: [
-                    {
-                      required: true,
-                      message: this.i18n.externalLinkVideoRule,
-                      trigger: "blur",
-                      pattern: /\.mp4|<\/iframe>$/
-                    }
-                  ]
-                }
-              }
-            ],
-            template(content) {
-              if (/\.mp4$/.test(content)) {
-                content = `<video src="${content}" controls></video>`;
-              }
-              return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${content}</p>`;
-            }
-          }
-        }
-      ],
       // 当前显示的资源弹出框，默认不显示
       dialogShow: ""
     };

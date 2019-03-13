@@ -1,8 +1,8 @@
 !(function(e) {
   function t(t) {
-    for (var n, r, i = t[0], c = t[1], a = 0, u = []; a < i.length; a++)
-      (r = i[a]), o[r] && u.push(o[r][0]), (o[r] = 0);
-    for (n in c) Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]);
+    for (var n, r, i = t[0], a = t[1], c = 0, u = []; c < i.length; c++)
+      (r = i[c]), o[r] && u.push(o[r][0]), (o[r] = 0);
+    for (n in a) Object.prototype.hasOwnProperty.call(a, n) && (e[n] = a[n]);
     for (l && l(t); u.length; ) u.shift()();
   }
   var n = {},
@@ -22,33 +22,33 @@
           n = o[e] = [t, r];
         });
         t.push((n[2] = i));
-        var c,
-          a = document.createElement("script");
-        (a.charset = "utf-8"),
-          (a.timeout = 120),
-          r.nc && a.setAttribute("nonce", r.nc),
-          (a.src = (function(e) {
+        var a,
+          c = document.createElement("script");
+        (c.charset = "utf-8"),
+          (c.timeout = 120),
+          r.nc && c.setAttribute("nonce", r.nc),
+          (c.src = (function(e) {
             return r.p + "" + e + ".bundle.js";
           })(e)),
-          (c = function(t) {
-            (a.onerror = a.onload = null), clearTimeout(l);
+          (a = function(t) {
+            (c.onerror = c.onload = null), clearTimeout(l);
             var n = o[e];
             if (0 !== n) {
               if (n) {
                 var r = t && ("load" === t.type ? "missing" : t.type),
                   i = t && t.target && t.target.src,
-                  c = new Error(
+                  a = new Error(
                     "Loading chunk " + e + " failed.\n(" + r + ": " + i + ")"
                   );
-                (c.type = r), (c.request = i), n[1](c);
+                (a.type = r), (a.request = i), n[1](a);
               }
               o[e] = void 0;
             }
           });
         var l = setTimeout(function() {
-          c({ type: "timeout", target: a });
+          a({ type: "timeout", target: c });
         }, 12e4);
-        (a.onerror = a.onload = c), document.head.appendChild(a);
+        (c.onerror = c.onload = a), document.head.appendChild(c);
       }
     return Promise.all(t);
   }),
@@ -101,10 +101,10 @@
       throw (console.error(e), e);
     });
   var i = (window.webpackJsonp = window.webpackJsonp || []),
-    c = i.push.bind(i);
+    a = i.push.bind(i);
   (i.push = t), (i = i.slice());
-  for (var a = 0; a < i.length; a++) t(i[a]);
-  var l = c;
+  for (var c = 0; c < i.length; c++) t(i[c]);
+  var l = a;
   r((r.s = 2));
 })([
   function(e, t) {
@@ -131,7 +131,6 @@
             n("el-tinymce", {
               attrs: {
                 content: e.content,
-                i18n: e.i18n.default(),
                 "upload-props": { tip: "tip" },
                 url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
               },
@@ -157,6 +156,9 @@
             e._v(" "),
             n("el-tinymce", {
               attrs: {
+                i18n: e.i18n,
+                list: e.list,
+                "upload-props": e.uploadProps,
                 content: e.content,
                 url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
               },
@@ -171,8 +173,8 @@
         );
       };
     i._withStripped = !0;
-    var c = n(1),
-      a = new (n.n(c)).a(
+    var a = n(1),
+      c = new (n.n(a)).a(
         "example-ucloud",
         "https://private-87040-publicexample.apiary-mock.com/upload",
         "https://private-87040-publicexample.apiary-mock.com/upload/token"
@@ -182,8 +184,8 @@
       if ("[object File]" !== Object.prototype.toString.call(t))
         throw new Error("file参数必须为File数据类型");
       return new Promise(function(e, n) {
-        a.PREFIX = "example/".concat(t.type);
-        a.hitSliceUpload(
+        c.PREFIX = "example/".concat(t.type);
+        c.hitSliceUpload(
           t,
           function(n) {
             "[object Object]" !== Object.prototype.toString.call(n) &&
@@ -206,47 +208,168 @@
         );
       });
     }
-    var u = {
-      type: Object,
-      default: function() {
-        return {
-          resource: "Resource",
-          picture: "Picture",
-          localPicture: "Local Picture",
-          localPictureDesc:
-            "Support png, jpg, gif, svg, webp, size cannot exceed 10M",
-          localPictureRule: "Please upload pictures",
-          externalLinkPicture: "External Link Picture",
-          externalLinkPictureDesc: "Support png, jpg, gif, svg, webp",
-          externalLinkPictureRule: "Please enter valid picture link",
-          audio: "Audio",
-          localAudio: "Local Audio",
-          localAudioDesc:
-            "Support mp3、ogg、wav、flac、aac, size can not exceed 100M",
-          localAudioRule: "Please upload audio",
-          externalLinkAudio: "External Link Audio",
-          externalLinkAudioDesc: "Support mp3、ogg、wav、flac、aac",
-          externalLinkAudioRule: "Please enter valid audio link",
-          video: "Video",
-          localVideo: "Local Video",
-          localVideoDesc: "Support mp4, size can not exceed 1G",
-          localVideoRule: "Please upload video",
-          externalLinkVideo: "External Link Video",
-          externalLinkVideoDesc:
-            "Support mp4 links and third-party websites to share video iframe code",
-          externalLinkVideoRule: "Please enter valid video link or code",
-          btn: { reset: "重置", submit: "提交" }
-        };
-      }
-    };
-    var p = (function(e, t, n, o, r, i, c, a) {
+    var u = { resource: "Resource", btn: { reset: "reset", submit: "submit" } },
+      s = [
+        {
+          type: "image",
+          accept: "image/*",
+          title: "Picture",
+          dialog: {
+            activeName: "image0",
+            tabs: [
+              {
+                title: "Local Picture",
+                desc:
+                  "Support png, jpg, gif, svg, webp, size cannot exceed 10M",
+                upload: { size: 10240 },
+                formName: "image0",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please upload pictures",
+                      trigger: "blur"
+                    }
+                  ]
+                }
+              },
+              {
+                title: "External Link Picture",
+                desc: "Support png, jpg, gif, svg, webp",
+                formName: "image1",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please enter valid picture link",
+                      trigger: "blur",
+                      pattern: /\.(png|jpe?g|gif|svg|webp)$/
+                    }
+                  ]
+                }
+              }
+            ],
+            template: function(e) {
+              return '<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="'.concat(
+                e,
+                '"></p>'
+              );
+            }
+          }
+        },
+        {
+          type: "audio",
+          accept: ".mp3,.ogg,.wav,.flac,.aac",
+          title: "Audio",
+          dialog: {
+            activeName: "audio0",
+            tabs: [
+              {
+                title: "Local Audio",
+                desc: "Support mp3|ogg|wav|flac|aac, size can not exceed 100M",
+                upload: { size: 102400 },
+                formName: "audio0",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please upload audio",
+                      trigger: "blur"
+                    }
+                  ]
+                }
+              },
+              {
+                title: "External Link Audio",
+                desc: "Support mp3|ogg|wav|flac|aac",
+                formName: "audio1",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please enter valid audio link",
+                      trigger: "blur",
+                      pattern: /\.(mp3|ogg|wav|flac|aac)$/
+                    }
+                  ]
+                }
+              }
+            ],
+            template: function(e) {
+              return '<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="'.concat(
+                e,
+                '" controls></audio></p>'
+              );
+            }
+          }
+        },
+        {
+          type: "video",
+          accept: ".mp4,.webm",
+          title: "Video",
+          dialog: {
+            activeName: "video0",
+            tabs: [
+              {
+                title: "Local Video",
+                desc: "Support mp4, size can not exceed 1G",
+                upload: { size: 1048576 },
+                formName: "video0",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please upload video",
+                      trigger: "blur"
+                    }
+                  ]
+                }
+              },
+              {
+                title: "External Link Video",
+                desc:
+                  "Support mp4|webm links and third-party websites to share video iframe code",
+                formName: "video1",
+                formData: { content: "" },
+                formRules: {
+                  content: [
+                    {
+                      required: !0,
+                      message: "Please enter valid video link or code",
+                      trigger: "blur",
+                      pattern: /\.(mp4|webm)|<\/iframe>$/
+                    }
+                  ]
+                }
+              }
+            ],
+            template: function(e) {
+              return (
+                /\.(mp4|webm)$/.test(e) &&
+                  (e = '<video src="'.concat(e, '" controls></video>')),
+                '<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >'.concat(
+                  e,
+                  "</p>"
+                )
+              );
+            }
+          }
+        }
+      ],
+      p = { placeholder: "File link" };
+    var d = (function(e, t, n, o, r, i, a, c) {
       var l,
         u = "function" == typeof e ? e.options : e;
       if (
         (t && ((u.render = t), (u.staticRenderFns = n), (u._compiled = !0)),
         o && (u.functional = !0),
         i && (u._scopeId = "data-v-" + i),
-        c
+        a
           ? ((l = function(e) {
               (e =
                 e ||
@@ -257,11 +380,11 @@
                 "undefined" == typeof __VUE_SSR_CONTEXT__ ||
                 (e = __VUE_SSR_CONTEXT__),
                 r && r.call(this, e),
-                e && e._registeredComponents && e._registeredComponents.add(c);
+                e && e._registeredComponents && e._registeredComponents.add(a);
             }),
             (u._ssrRegister = l))
           : r &&
-            (l = a
+            (l = c
               ? function() {
                   r.call(this, this.$root.$options.shadowRoot);
                 }
@@ -270,13 +393,13 @@
       )
         if (u.functional) {
           u._injectStyles = l;
-          var p = u.render;
+          var s = u.render;
           u.render = function(e, t) {
-            return l.call(t), p(e, t);
+            return l.call(t), s(e, t);
           };
         } else {
-          var s = u.beforeCreate;
-          u.beforeCreate = s ? [].concat(s, l) : [l];
+          var p = u.beforeCreate;
+          u.beforeCreate = p ? [].concat(p, l) : [l];
         }
       return { exports: e, options: u };
     })(
@@ -295,7 +418,7 @@
           }
         },
         data: function() {
-          return { i18n: u, content: "" };
+          return { i18n: u, list: s, uploadProps: p, content: "" };
         },
         methods: {
           contentChange: function(e) {
@@ -310,12 +433,12 @@
       null,
       null
     );
-    p.options.__file = "example/components/App.vue";
-    var s = p.exports;
+    d.options.__file = "example/components/App.vue";
+    var m = d.exports;
     new r.a({
       el: "#app",
       render: function(e) {
-        return e(s);
+        return e(m);
       }
     });
   },

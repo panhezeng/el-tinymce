@@ -141,15 +141,15 @@
               for (var n = [], i = {}, o = 0; o < t.length; o++) {
                 var r = t[o],
                   a = r[0],
-                  l = {
+                  s = {
                     id: e + ":" + o,
                     css: r[1],
                     media: r[2],
                     sourceMap: r[3]
                   };
                 i[a]
-                  ? i[a].parts.push(l)
-                  : n.push((i[a] = { id: a, parts: [l] }));
+                  ? i[a].parts.push(s)
+                  : n.push((i[a] = { id: a, parts: [s] }));
               }
               return n;
             }
@@ -166,13 +166,13 @@
               a =
                 o &&
                 (document.head || document.getElementsByTagName("head")[0]),
-              l = null,
-              s = 0,
+              s = null,
+              l = 0,
               c = !1,
               u = function() {},
               d = null,
-              p = "data-vue-ssr-id",
-              m =
+              m = "data-vue-ssr-id",
+              p =
                 "undefined" != typeof navigator &&
                 /msie [6-9]\b/.test(navigator.userAgent.toLowerCase());
             function f(e, t, n, o) {
@@ -182,18 +182,18 @@
                 g(a),
                 function(t) {
                   for (var n = [], o = 0; o < a.length; o++) {
-                    var l = a[o];
-                    (s = r[l.id]).refs--, n.push(s);
+                    var s = a[o];
+                    (l = r[s.id]).refs--, n.push(l);
                   }
                   for (
                     t ? g((a = i(e, t))) : (a = []), o = 0;
                     o < n.length;
                     o++
                   ) {
-                    var s;
-                    if (0 === (s = n[o]).refs) {
-                      for (var c = 0; c < s.parts.length; c++) s.parts[c]();
-                      delete r[s.id];
+                    var l;
+                    if (0 === (l = n[o]).refs) {
+                      for (var c = 0; c < l.parts.length; c++) l.parts[c]();
+                      delete r[l.id];
                     }
                   }
                 }
@@ -207,12 +207,12 @@
                   i.refs++;
                   for (var o = 0; o < i.parts.length; o++)
                     i.parts[o](n.parts[o]);
-                  for (; o < n.parts.length; o++) i.parts.push(h(n.parts[o]));
+                  for (; o < n.parts.length; o++) i.parts.push(b(n.parts[o]));
                   i.parts.length > n.parts.length &&
                     (i.parts.length = n.parts.length);
                 } else {
                   var a = [];
-                  for (o = 0; o < n.parts.length; o++) a.push(h(n.parts[o]));
+                  for (o = 0; o < n.parts.length; o++) a.push(b(n.parts[o]));
                   r[n.id] = { id: n.id, refs: 1, parts: a };
                 }
               }
@@ -221,19 +221,19 @@
               var e = document.createElement("style");
               return (e.type = "text/css"), a.appendChild(e), e;
             }
-            function h(e) {
+            function b(e) {
               var t,
                 n,
-                i = document.querySelector("style[" + p + '~="' + e.id + '"]');
+                i = document.querySelector("style[" + m + '~="' + e.id + '"]');
               if (i) {
                 if (c) return u;
                 i.parentNode.removeChild(i);
               }
-              if (m) {
-                var o = s++;
-                (i = l || (l = y())),
-                  (t = x.bind(null, i, o, !1)),
-                  (n = x.bind(null, i, o, !0));
+              if (p) {
+                var o = l++;
+                (i = s || (s = y())),
+                  (t = w.bind(null, i, o, !1)),
+                  (n = w.bind(null, i, o, !0));
               } else
                 (i = y()),
                   (t = function(e, t) {
@@ -242,7 +242,7 @@
                       o = t.sourceMap;
                     if (
                       (i && e.setAttribute("media", i),
-                      d.ssrId && e.setAttribute(p, t.id),
+                      d.ssrId && e.setAttribute(m, t.id),
                       o &&
                         ((n += "\n/*# sourceURL=" + o.sources[0] + " */"),
                         (n +=
@@ -278,13 +278,13 @@
               );
             }
             var v,
-              b = ((v = []),
+              h = ((v = []),
               function(e, t) {
                 return (v[e] = t), v.filter(Boolean).join("\n");
               });
-            function x(e, t, n, i) {
+            function w(e, t, n, i) {
               var o = n ? "" : i.css;
-              if (e.styleSheet) e.styleSheet.cssText = b(t, o);
+              if (e.styleSheet) e.styleSheet.cssText = h(t, o);
               else {
                 var r = document.createTextNode(o),
                   a = e.childNodes;
@@ -552,7 +552,8 @@
                                                                     .content,
                                                                 upload:
                                                                   e.upload,
-                                                                type: t.accept,
+                                                                accept:
+                                                                  t.accept,
                                                                 size:
                                                                   i.upload.size,
                                                                 readonly: !0
@@ -678,18 +679,18 @@
             o._withStripped = !0;
             var r = n(5),
               a = n.n(r),
-              l = n(0),
-              s = {
+              s = n(0),
+              l = {
                 name: "ElTinymceSide",
                 components: {
                   ElSingleUpload: a.a,
-                  "el-dialog": l.Dialog,
-                  "el-tabs": l.Tabs,
-                  "el-tab-pane": l.TabPane,
-                  "el-form": l.Form,
-                  "el-form-item": l.FormItem,
-                  "el-button": l.Button,
-                  "el-input": l.Input
+                  "el-dialog": s.Dialog,
+                  "el-tabs": s.Tabs,
+                  "el-tab-pane": s.TabPane,
+                  "el-form": s.Form,
+                  "el-form-item": s.FormItem,
+                  "el-button": s.Button,
+                  "el-input": s.Input
                 },
                 inheritAttrs: !1,
                 props: {
@@ -703,32 +704,169 @@
                     default: function() {
                       return {
                         resource: "资源",
-                        picture: "图片",
-                        localPicture: "本地图片",
-                        localPictureDesc:
-                          "支持png、jpg、gif、svg、webp，大小不能超过10M",
-                        localPictureRule: "请上传图片",
-                        externalLinkPicture: "外链图片",
-                        externalLinkPictureDesc: "支持png、jpg、gif、svg、webp",
-                        externalLinkPictureRule: "请输入有效图片链接",
-                        audio: "音频",
-                        localAudio: "本地音频",
-                        localAudioDesc:
-                          "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
-                        localAudioRule: "请上传音频",
-                        externalLinkAudio: "外链音频",
-                        externalLinkAudioDesc: "支持mp3、ogg、wav、flac、aac",
-                        externalLinkAudioRule: "请输入有效音频链接",
-                        video: "视频",
-                        localVideo: "本地视频",
-                        localVideoDesc: "支持mp4，大小不能超过1G",
-                        localVideoRule: "请上传视频",
-                        externalLinkVideo: "外链视频",
-                        externalLinkVideoDesc:
-                          "支持mp4链接和第三方网站分享视频iframe代码",
-                        externalLinkVideoRule: "请输入有效视频链接或代码",
                         btn: { reset: "重置", submit: "提交" }
                       };
+                    }
+                  },
+                  list: {
+                    type: Array,
+                    default: function() {
+                      return [
+                        {
+                          type: "image",
+                          accept: "image/*",
+                          title: "图片",
+                          dialog: {
+                            activeName: "image0",
+                            tabs: [
+                              {
+                                title: "本地图片",
+                                desc:
+                                  "支持png、jpg、gif、svg、webp，大小不能超过10M",
+                                upload: { size: 10240 },
+                                formName: "image0",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请上传图片",
+                                      trigger: "blur"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                title: "外链图片",
+                                desc: "支持png、jpg、gif、svg、webp",
+                                formName: "image1",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请输入有效图片链接",
+                                      trigger: "blur",
+                                      pattern: /\.(png|jpe?g|gif|svg|webp)$/
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            template: function(e) {
+                              return '<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="'.concat(
+                                e,
+                                '"></p>'
+                              );
+                            }
+                          }
+                        },
+                        {
+                          type: "audio",
+                          accept: ".mp3,.ogg,.wav,.flac,.aac",
+                          title: "音频",
+                          dialog: {
+                            activeName: "audio0",
+                            tabs: [
+                              {
+                                title: "本地音频",
+                                desc:
+                                  "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
+                                upload: { size: 102400 },
+                                formName: "audio0",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请上传音频",
+                                      trigger: "blur"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                title: "外链音频",
+                                desc: "支持mp3、ogg、wav、flac、aac",
+                                formName: "audio1",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请输入有效音频链接",
+                                      trigger: "blur",
+                                      pattern: /\.(mp3|ogg|wav|flac|aac)$/
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            template: function(e) {
+                              return '<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="'.concat(
+                                e,
+                                '" controls></audio></p>'
+                              );
+                            }
+                          }
+                        },
+                        {
+                          type: "video",
+                          accept: ".mp4,.webm",
+                          title: "视频",
+                          dialog: {
+                            activeName: "video0",
+                            tabs: [
+                              {
+                                title: "本地视频",
+                                desc: "支持mp4、webm，大小不能超过1G",
+                                upload: { size: 1048576 },
+                                formName: "video0",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请上传视频",
+                                      trigger: "blur"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                title: "外链视频",
+                                desc:
+                                  "支持mp4、webm链接和第三方网站分享视频iframe代码",
+                                formName: "video1",
+                                formData: { content: "" },
+                                formRules: {
+                                  content: [
+                                    {
+                                      required: !0,
+                                      message: "请输入有效视频链接或代码",
+                                      trigger: "blur",
+                                      pattern: /\.(mp4|webm)|<\/iframe>$/
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            template: function(e) {
+                              return (
+                                /\.(mp4|webm)$/.test(e) &&
+                                  (e = '<video src="'.concat(
+                                    e,
+                                    '" controls></video>'
+                                  )),
+                                '<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >'.concat(
+                                  e,
+                                  "</p>"
+                                )
+                              );
+                            }
+                          }
+                        }
+                      ];
                     }
                   },
                   upload: { required: !0, type: Function },
@@ -740,146 +878,7 @@
                   }
                 },
                 data: function() {
-                  return {
-                    list: [
-                      {
-                        type: "image",
-                        accept: "image/*",
-                        title: this.i18n.picture,
-                        dialog: {
-                          activeName: "image0",
-                          tabs: [
-                            {
-                              title: this.i18n.localPicture,
-                              desc: this.i18n.localPictureDesc,
-                              upload: { size: 10240 },
-                              formName: "image0",
-                              formData: { content: "" },
-                              formRules: {
-                                content: [
-                                  {
-                                    required: !0,
-                                    message: this.i18n.localPictureRule,
-                                    trigger: "blur"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              title: this.i18n.externalLinkPicture,
-                              desc: this.i18n.externalLinkPictureDesc,
-                              formName: "image1",
-                              formData: { content: "" },
-                              formRules: {
-                                content: [
-                                  {
-                                    required: !0,
-                                    message: this.i18n.externalLinkPictureRule,
-                                    trigger: "blur",
-                                    pattern: /\.(png|jpe?g|gif|svg|webp)$/
-                                  }
-                                ]
-                              }
-                            }
-                          ],
-                          template: function(e) {
-                            return '<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="'.concat(
-                              e,
-                              '"></p>'
-                            );
-                          }
-                        }
-                      },
-                      {
-                        type: "audio",
-                        accept: ".mp3,.ogg,.wav,.flac,.aac",
-                        title: this.i18n.audio,
-                        dialog: {
-                          activeName: "audio0",
-                          tabs: [
-                            {
-                              title: this.i18n.localAudio,
-                              desc: this.i18n.localAudioDesc,
-                              upload: { size: 102400 },
-                              formName: "audio0",
-                              formData: { content: "" },
-                              formRules: {
-                                content: [
-                                  {
-                                    required: !0,
-                                    message: this.i18n.localAudioRule,
-                                    trigger: "blur"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              title: this.i18n.externalLinkAudio,
-                              desc: this.i18n.externalLinkAudioDesc,
-                              formName: "audio1",
-                              formData: { content: "" },
-                              formRules: {
-                                content: [
-                                  {
-                                    required: !0,
-                                    message: this.i18n.externalLinkAudioRule,
-                                    trigger: "blur",
-                                    pattern: /\.(mp3|ogg|wav|flac|aac)$/
-                                  }
-                                ]
-                              }
-                            }
-                          ],
-                          template: function(e) {
-                            return '<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="'.concat(
-                              e,
-                              '" controls></audio></p>'
-                            );
-                          }
-                        }
-                      },
-                      {
-                        type: "video",
-                        accept: "video/*",
-                        title: this.i18n.video,
-                        dialog: {
-                          activeName: "video0",
-                          tabs: [
-                            {
-                              title: this.i18n.externalLinkVideo,
-                              desc: this.i18n.externalLinkVideoDesc,
-                              formName: "video0",
-                              formData: { content: "" },
-                              formRules: {
-                                content: [
-                                  {
-                                    required: !0,
-                                    message: this.i18n.externalLinkVideoRule,
-                                    trigger: "blur",
-                                    pattern: /\.mp4|<\/iframe>$/
-                                  }
-                                ]
-                              }
-                            }
-                          ],
-                          template: function(e) {
-                            return (
-                              /\.mp4$/.test(e) &&
-                                (e = '<video src="'.concat(
-                                  e,
-                                  '" controls></video>'
-                                )),
-                              '<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >'.concat(
-                                e,
-                                "</p>"
-                              )
-                            );
-                          }
-                        }
-                      }
-                    ],
-                    dialogShow: ""
-                  };
+                  return { dialogShow: "" };
                 },
                 computed: {
                   sideShow: function() {
@@ -913,8 +912,8 @@
                   }
                 }
               };
-            function c(e, t, n, i, o, r, a, l) {
-              var s,
+            function c(e, t, n, i, o, r, a, s) {
+              var l,
                 c = "function" == typeof e ? e.options : e;
               if (
                 (t &&
@@ -922,7 +921,7 @@
                 i && (c.functional = !0),
                 r && (c._scopeId = "data-v-" + r),
                 a
-                  ? ((s = function(e) {
+                  ? ((l = function(e) {
                       (e =
                         e ||
                         (this.$vnode && this.$vnode.ssrContext) ||
@@ -936,35 +935,35 @@
                           e._registeredComponents &&
                           e._registeredComponents.add(a);
                     }),
-                    (c._ssrRegister = s))
+                    (c._ssrRegister = l))
                   : o &&
-                    (s = l
+                    (l = s
                       ? function() {
                           o.call(this, this.$root.$options.shadowRoot);
                         }
                       : o),
-                s)
+                l)
               )
                 if (c.functional) {
-                  c._injectStyles = s;
+                  c._injectStyles = l;
                   var u = c.render;
                   c.render = function(e, t) {
-                    return s.call(t), u(e, t);
+                    return l.call(t), u(e, t);
                   };
                 } else {
                   var d = c.beforeCreate;
-                  c.beforeCreate = d ? [].concat(d, s) : [s];
+                  c.beforeCreate = d ? [].concat(d, l) : [l];
                 }
               return { exports: e, options: c };
             }
             n(8);
-            var u = c(s, o, [], !1, null, null, null);
+            var u = c(l, o, [], !1, null, null, null);
             u.options.__file = "src/ElTinymce/components/Side.vue";
             var d = u.exports,
-              p = n(6),
-              m = {
+              m = n(6),
+              p = {
                 name: "ElTinymce",
-                components: { VueTinymce: n.n(p).a, Side: d },
+                components: { VueTinymce: n.n(m).a, Side: d },
                 inheritAttrs: !1,
                 props: {
                   content: { type: String, required: !0 },
@@ -1024,7 +1023,7 @@
                   }
                 }
               },
-              f = (n(12), c(m, i, [], !1, null, null, null));
+              f = (n(12), c(p, i, [], !1, null, null, null));
             (f.options.__file = "src/ElTinymce/index.vue"),
               (t.default = f.exports);
           }
