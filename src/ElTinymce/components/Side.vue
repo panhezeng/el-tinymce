@@ -135,7 +135,7 @@ export default {
         };
       }
     },
-    // 资源列表，dialog是该资源的弹出框数据
+    // 侧边栏列表，dialog是该侧边按钮的弹出框数据
     list: {
       type: Array,
       default() {
@@ -304,6 +304,7 @@ export default {
       required: true,
       type: Function
     },
+    // 单文件上传组件的属性
     uploadProps: {
       type: Object,
       default() {
