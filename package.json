@@ -34,7 +34,7 @@
     "element-ui": "~2"
   },
   "dependencies": {
-    "@panhezeng/el-single-upload": "~1",
+    "@panhezeng/el-single-upload": "~2",
     "@panhezeng/vue-tinymce": "~2"
   },
   "devDependencies": {
