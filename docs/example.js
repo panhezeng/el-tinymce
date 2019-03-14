@@ -220,7 +220,7 @@
               {
                 title: "Local Picture",
                 desc:
-                  "Support png, jpg, gif, svg, webp, size cannot exceed 10M",
+                  "Support png, jpg, gif, svg and webp, size cannot exceed 10M",
                 upload: { size: 10240 },
                 formName: "image0",
                 formData: { content: "" },
@@ -236,7 +236,7 @@
               },
               {
                 title: "External Link Picture",
-                desc: "Support png, jpg, gif, svg, webp",
+                desc: "Support png, jpg, gif, svg and webp",
                 formName: "image1",
                 formData: { content: "" },
                 formRules: {
@@ -268,7 +268,8 @@
             tabs: [
               {
                 title: "Local Audio",
-                desc: "Support mp3|ogg|wav|flac|aac, size can not exceed 100M",
+                desc:
+                  "Support mp3, ogg, wav, flac and aac, size can not exceed 100M",
                 upload: { size: 102400 },
                 formName: "audio0",
                 formData: { content: "" },
@@ -284,7 +285,7 @@
               },
               {
                 title: "External Link Audio",
-                desc: "Support mp3|ogg|wav|flac|aac",
+                desc: "Support mp3, ogg, wav, flac and aac",
                 formName: "audio1",
                 formData: { content: "" },
                 formRules: {
@@ -316,7 +317,7 @@
             tabs: [
               {
                 title: "Local Video",
-                desc: "Support mp4, size can not exceed 1G",
+                desc: "Support mp4 and webm , size can not exceed 1G",
                 upload: { size: 1048576 },
                 formName: "video0",
                 formData: { content: "" },
@@ -333,7 +334,7 @@
               {
                 title: "External Link Video",
                 desc:
-                  "Support mp4|webm links and third-party websites to share video iframe code",
+                  "Support mp4 and webm links or third-party websites to share video iframe code",
                 formName: "video1",
                 formData: { content: "" },
                 formRules: {
