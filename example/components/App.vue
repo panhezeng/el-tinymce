@@ -5,18 +5,18 @@
       :content.sync="content"
       @content-change="contentChange"
       :upload-props="{ tip: 'tip' }"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
     />
     <el-tinymce
       :content.sync="content"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
     />
     <el-tinymce
       :i18n="i18n"
       :list="list"
       :upload-props="uploadProps"
       :content.sync="content"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
     />
   </div>
 </template>

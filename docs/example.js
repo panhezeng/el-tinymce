@@ -132,7 +132,7 @@
               attrs: {
                 content: e.content,
                 "upload-props": { tip: "tip" },
-                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
               },
               on: {
                 "update:content": function(t) {
@@ -145,7 +145,7 @@
             n("el-tinymce", {
               attrs: {
                 content: e.content,
-                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
               },
               on: {
                 "update:content": function(t) {
@@ -160,7 +160,7 @@
                 list: e.list,
                 "upload-props": e.uploadProps,
                 content: e.content,
-                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.2"
+                url: "https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
               },
               on: {
                 "update:content": function(t) {
