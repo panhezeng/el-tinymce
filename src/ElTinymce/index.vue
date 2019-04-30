@@ -9,11 +9,11 @@
       v-on="$listeners"
     />
     <side
-      v-bind="$attrs"
-      v-on="$listeners"
+      v-if="!readonly"
       :upload="upload"
       :editor="editor"
-      v-if="!readonly"
+      v-bind="$attrs"
+      v-on="$listeners"
     />
   </div>
 </template>

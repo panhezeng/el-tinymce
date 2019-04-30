@@ -4,7 +4,6 @@
     <el-tinymce
       :content.sync="content"
       @content-change="contentChange"
-      :upload-props="{ tip: 'tip' }"
       url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
     />
     <el-tinymce
@@ -14,7 +13,6 @@
     <el-tinymce
       :i18n="i18n"
       :list="list"
-      :upload-props="uploadProps"
       :content.sync="content"
       url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
     />
@@ -91,16 +89,17 @@ const i18n = {
 const list = [
   {
     type: "image",
-    accept: "image/*",
-    title: "Picture",
+    title: "图片",
     dialog: {
       activeName: "image0",
       tabs: [
         {
-          title: "Local Picture",
-          desc: "Support png, jpg, gif, svg and webp, size cannot exceed 10M",
-          upload: {
-            size: 10240
+          title: "本地图片",
+          desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
+          uploadProps: {
+            accept: "image/*",
+            size: 10240,
+            placeholder: "图片链接地址"
           },
           formName: "image0",
           formData: {
@@ -110,15 +109,15 @@ const list = [
             content: [
               {
                 required: true,
-                message: "Please upload pictures",
+                message: "请上传图片",
                 trigger: "blur"
               }
             ]
           }
         },
         {
-          title: "External Link Picture",
-          desc: "Support png, jpg, gif, svg and webp",
+          title: "外链图片",
+          desc: "支持png、jpg、gif、svg、webp",
           formName: "image1",
           formData: {
             content: ""
@@ -127,7 +126,7 @@ const list = [
             content: [
               {
                 required: true,
-                message: "Please enter valid picture link",
+                message: "请输入有效图片链接",
                 trigger: "blur",
                 pattern: /\.(png|jpe?g|gif|svg|webp)$/
               }
@@ -135,23 +134,26 @@ const list = [
           }
         }
       ],
-      template(content) {
-        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${content}"></p>`;
+      template(data) {
+        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${
+          data.content
+        }"></p>`;
       }
     }
   },
   {
     type: "audio",
-    accept: ".mp3,.ogg,.wav,.flac,.aac",
-    title: "Audio",
+    title: "音频",
     dialog: {
       activeName: "audio0",
       tabs: [
         {
-          title: "Local Audio",
-          desc: "Support mp3, ogg, wav, flac and aac, size can not exceed 100M",
-          upload: {
-            size: 102400
+          title: "本地音频",
+          desc: "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
+          uploadProps: {
+            accept: ".mp3,.ogg,.wav,.flac,.aac",
+            size: 102400,
+            placeholder: "音频链接地址"
           },
           formName: "audio0",
           formData: {
@@ -161,15 +163,15 @@ const list = [
             content: [
               {
                 required: true,
-                message: "Please upload audio",
+                message: "请上传音频",
                 trigger: "blur"
               }
             ]
           }
         },
         {
-          title: "External Link Audio",
-          desc: "Support mp3, ogg, wav, flac and aac",
+          title: "外链音频",
+          desc: "支持mp3、ogg、wav、flac、aac",
           formName: "audio1",
           formData: {
             content: ""
@@ -178,7 +180,7 @@ const list = [
             content: [
               {
                 required: true,
-                message: "Please enter valid audio link",
+                message: "请输入有效音频链接",
                 trigger: "blur",
                 pattern: /\.(mp3|ogg|wav|flac|aac)$/
               }
@@ -186,51 +188,64 @@ const list = [
           }
         }
       ],
-      template(content) {
-        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${content}" controls></audio></p>`;
+      template(data) {
+        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${
+          data.content
+        }" controls></audio></p>`;
       }
     }
   },
   {
     type: "video",
-    accept: ".mp4,.webm",
-    title: "Video",
+    title: "视频",
     dialog: {
       activeName: "video0",
+      poster: {
+        title: "封面",
+        desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
+        uploadProps: {
+          accept: "image/*",
+          size: 10240,
+          placeholder: "视频封面图片链接地址"
+        }
+      },
       tabs: [
         {
-          title: "Local Video",
-          desc: "Support mp4 and webm , size can not exceed 1G",
-          upload: {
-            size: 1048576
+          title: "本地视频",
+          desc: "支持mp4、webm，大小不能超过1G",
+          uploadProps: {
+            accept: ".mp4,.webm",
+            size: 1048576,
+            placeholder: "视频链接地址"
           },
           formName: "video0",
           formData: {
-            content: ""
+            content: "",
+            poster: ""
           },
           formRules: {
             content: [
               {
                 required: true,
-                message: "Please upload video",
+                message: "请上传视频",
                 trigger: "blur"
               }
             ]
           }
         },
         {
-          title: "External Link Video",
-          desc:
-            "Support mp4 and webm links or third-party websites to share video iframe code",
+          title: "外链视频",
+          desc: "支持mp4、webm链接和第三方网站分享视频iframe代码",
           formName: "video1",
           formData: {
-            content: ""
+            content: "",
+            poster: ""
           },
           formRules: {
             content: [
               {
                 required: true,
-                message: "Please enter valid video link or code",
+                message: "请输入有效视频链接或代码",
                 trigger: "blur",
                 pattern: /\.(mp4|webm)|<\/iframe>$/
               }
@@ -238,11 +253,15 @@ const list = [
           }
         }
       ],
-      template(content) {
-        if (/\.(mp4|webm)$/.test(content)) {
-          content = `<video src="${content}" controls></video>`;
+      template(data) {
+        if (/\.(mp4|webm)$/.test(data.content)) {
+          data.content = `<video controls src="${data.content}" poster="${
+            data.poster
+          }"></video>`;
         }
-        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${content}</p>`;
+        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${
+          data.content
+        }</p>`;
       }
     }
   }
@@ -252,25 +271,25 @@ const uploadProps = {
   placeholder: "File link"
 };
 
-//  window.ElSingleUploadOptions = {upload: upload}
-//  require('../../src')
+window.ElSingleUploadOptions = { upload: upload };
+require("../../src");
 
-const ElTinymce = () => {
-  return import("../../dist/el-tinymce.min").then(res => {
-    Object.assign(res.props.upload, {
-      required: false,
-      default: upload
-    });
-
-    //      Object.assign(res.components.Side.props.i18n, i18n)
-
-    return Promise.resolve(res);
-  });
-};
+// const ElTinymce = () => {
+//   return import("../../dist/el-tinymce.min").then(res => {
+//     Object.assign(res.props.upload, {
+//       required: false,
+//       default: upload
+//     });
+//
+//     //      Object.assign(res.components.Side.props.i18n, i18n)
+//
+//     return Promise.resolve(res);
+//   });
+// };
 
 export default {
   name: "App",
-  components: { ElTinymce },
+  // components: { ElTinymce },
   data() {
     return {
       i18n,

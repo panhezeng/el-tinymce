@@ -114,7 +114,6 @@ export default {
         return [
           {
             type: "image",
-            accept: "image/*",
             title: "图片",
             dialog: {
               activeName: "image0",
@@ -122,8 +121,10 @@ export default {
                 {
                   title: "本地图片",
                   desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
-                  upload: {
-                    size: 10240
+                  uploadProps: {
+                    accept: "image/*",
+                    size: 10240,
+                    placeholder: "图片链接地址"
                   },
                   formName: "image0",
                   formData: {
@@ -158,14 +159,15 @@ export default {
                   }
                 }
               ],
-              template(content) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${content}"></p>`;
+              template(data) {
+                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${
+                  data.content
+                }"></p>`;
               }
             }
           },
           {
             type: "audio",
-            accept: ".mp3,.ogg,.wav,.flac,.aac",
             title: "音频",
             dialog: {
               activeName: "audio0",
@@ -173,8 +175,10 @@ export default {
                 {
                   title: "本地音频",
                   desc: "支持mp3、ogg、wav、flac、aac，大小不能超过100M",
-                  upload: {
-                    size: 102400
+                  uploadProps: {
+                    accept: ".mp3,.ogg,.wav,.flac,.aac",
+                    size: 102400,
+                    placeholder: "音频链接地址"
                   },
                   formName: "audio0",
                   formData: {
@@ -209,27 +213,40 @@ export default {
                   }
                 }
               ],
-              template(content) {
-                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${content}" controls></audio></p>`;
+              template(data) {
+                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${
+                  data.content
+                }" controls></audio></p>`;
               }
             }
           },
           {
             type: "video",
-            accept: ".mp4,.webm",
             title: "视频",
             dialog: {
               activeName: "video0",
+              poster: {
+                title: "封面",
+                desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
+                uploadProps: {
+                  accept: "image/*",
+                  size: 10240,
+                  placeholder: "视频封面图片链接地址"
+                }
+              },
               tabs: [
                 {
                   title: "本地视频",
                   desc: "支持mp4、webm，大小不能超过1G",
-                  upload: {
-                    size: 1048576
+                  uploadProps: {
+                    accept: ".mp4,.webm",
+                    size: 1048576,
+                    placeholder: "视频链接地址"
                   },
                   formName: "video0",
                   formData: {
-                    content: ""
+                    content: "",
+                    poster: ""
                   },
                   formRules: {
                     content: [
@@ -246,7 +263,8 @@ export default {
                   desc: "支持mp4、webm链接和第三方网站分享视频iframe代码",
                   formName: "video1",
                   formData: {
-                    content: ""
+                    content: "",
+                    poster: ""
                   },
                   formRules: {
                     content: [
@@ -260,11 +278,15 @@ export default {
                   }
                 }
               ],
-              template(content) {
-                if (/\.(mp4|webm)$/.test(content)) {
-                  content = `<video src="${content}" controls></video>`;
+              template(data) {
+                if (/\.(mp4|webm)$/.test(data.content)) {
+                  data.content = `<video controls src="${
+                    data.content
+                  }" poster="${data.poster}"></video>`;
                 }
-                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${content}</p>`;
+                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${
+                  data.content
+                }</p>`;
               }
             }
           }
@@ -275,13 +297,6 @@ export default {
     upload: {
       required: true,
       type: Function
-    },
-    // 单文件上传组件的属性
-    uploadProps: {
-      type: Object,
-      default() {
-        return {};
-      }
     }
   }
 };
