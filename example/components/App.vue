@@ -201,7 +201,6 @@ const list = [
     dialog: {
       activeName: "video0",
       poster: {
-        title: "封面",
         desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
         uploadProps: {
           accept: "image/*",
@@ -271,25 +270,25 @@ const uploadProps = {
   placeholder: "File link"
 };
 
-window.ElSingleUploadOptions = { upload: upload };
-require("../../src");
+// window.ElSingleUploadOptions = { upload: upload };
+// require("../../src");
 
-// const ElTinymce = () => {
-//   return import("../../dist/el-tinymce.min").then(res => {
-//     Object.assign(res.props.upload, {
-//       required: false,
-//       default: upload
-//     });
-//
-//     //      Object.assign(res.components.Side.props.i18n, i18n)
-//
-//     return Promise.resolve(res);
-//   });
-// };
+const ElTinymce = () => {
+  return import("../../dist/el-tinymce.min").then(res => {
+    Object.assign(res.props.upload, {
+      required: false,
+      default: upload
+    });
+
+    //      Object.assign(res.components.Side.props.i18n, i18n)
+
+    return Promise.resolve(res);
+  });
+};
 
 export default {
   name: "App",
-  // components: { ElTinymce },
+  components: { ElTinymce },
   data() {
     return {
       i18n,

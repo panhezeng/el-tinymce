@@ -226,7 +226,6 @@ export default {
             dialog: {
               activeName: "video0",
               poster: {
-                title: "封面",
                 desc: "支持png、jpg、gif、svg、webp，大小不能超过10M",
                 uploadProps: {
                   accept: "image/*",
