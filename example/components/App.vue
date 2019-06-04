@@ -1,20 +1,13 @@
 <template>
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
-    <el-tinymce
-      :content.sync="content"
-      @content-change="contentChange"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
-    />
-    <el-tinymce
-      :content.sync="content"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
-    />
+    <el-tinymce :content.sync="content" @content-change="contentChange" />
+    <el-tinymce :content.sync="content" />
     <el-tinymce
       :i18n="i18n"
       :list="list"
       :content.sync="content"
-      url="https://cdn.jsdelivr.net/npm/tinymce@5.0.3"
+      url="https://unpkg.com/tinymce@~5"
     />
   </div>
 </template>
