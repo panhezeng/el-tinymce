@@ -14,6 +14,8 @@
 
 首先请按 element-ui 官方文档安装 element-ui，确保能正常使用 element-ui
 
+打包 polyfills 应当是最终使用组件的应用的责任
+
 index.vue
 
 ```vue
@@ -160,9 +162,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${
-                  data.content
-                }"></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}"></p>`;
               }
             }
           },
@@ -214,9 +214,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${
-                  data.content
-                }" controls></audio></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
               }
             }
           },
@@ -279,13 +277,9 @@ export default {
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
-                  data.content = `<video controls src="${
-                    data.content
-                  }" poster="${data.poster}"></video>`;
+                  data.content = `<video controls src="${data.content}" poster="${data.poster}"></video>`;
                 }
-                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${
-                  data.content
-                }</p>`;
+                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
               }
             }
           }
@@ -399,5 +393,4 @@ npm run build
 
 # 发版
 npm set registry https://registry.npmjs.org/ && npm set @panhezeng:registry https://registry.npmjs.org/ && npm version patch && npm publish --access public && npm set registry https://registry.npm.taobao.org/ && npm set @panhezeng:registry https://registry.npm.taobao.org/
-
 ```
