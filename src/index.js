@@ -17,7 +17,9 @@ function install(
 
   if (Object.prototype.toString.call(options) === "[object Object]") {
     if (
-      Object.prototype.toString.call(options.upload) === "[object Function]"
+      /^\[object [^F]*Function\]$/.test(
+        Object.prototype.toString.call(options.upload)
+      )
     ) {
       Object.assign(ElTinymce.props.upload, {
         required: false,

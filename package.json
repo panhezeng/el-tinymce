@@ -34,8 +34,8 @@
     "element-ui": "~2"
   },
   "dependencies": {
-    "@panhezeng/el-single-upload": "^2.1.3",
-    "@panhezeng/vue-tinymce": "^2.1.5"
+    "@panhezeng/el-single-upload": "^2.1.4",
+    "@panhezeng/vue-tinymce": "^2.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -47,12 +47,12 @@
     "@panhezeng/ucloud-ufile": "^1.0.13",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.1.0",
-    "element-ui": "^2.10.1",
+    "element-ui": "^2.11.0",
     "file-loader": "^4.1.0",
     "husky": "^3.0.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
-    "lint-staged": "^9.2.0",
+    "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
     "tinymce": "^5.0.12",
     "url-loader": "^2.1.0",
