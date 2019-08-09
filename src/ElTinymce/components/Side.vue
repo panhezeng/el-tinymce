@@ -372,12 +372,17 @@ export default {
       //        console.log(this.$refs)
       const tabs = this.list[index].dialog.tabs;
       tabs.forEach(tab => {
-        this.reset(this.$refs[tab.formName][0]);
+        this.reset(tab);
       });
       this.dialogShow = "";
     },
-    reset(form) {
-      form.resetFields();
+    reset(tab) {
+      for (const prop in tab.formData) {
+        if (tab.formData.hasOwnProperty(prop)) {
+          tab.formData[prop] = "";
+        }
+      }
+      // this.$refs[tab.formName][0].resetFields();
     },
     submit(form, formData, template) {
       form.validate(valid => {
