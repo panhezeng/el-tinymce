@@ -57,6 +57,17 @@
                     v-bind="tab.uploadProps"
                   />
                   <el-input v-else v-model="tab.formData.content" />
+                  <div
+                    v-if="tab.formData.hasOwnProperty('width')"
+                    class="el-tinymce-dialog-width-height"
+                  >
+                    <span
+                      >{{ i18n.width
+                      }}<el-input v-model="tab.formData.width"/></span
+                    ><span
+                      >{{ i18n.height }}<el-input v-model="tab.formData.height"
+                    /></span>
+                  </div>
                   <div class="el-tinymce-dialog-desc">{{ tab.desc }}</div>
                 </el-form-item>
                 <el-form-item class="el-tinymce-dialog-btn">
@@ -144,7 +155,9 @@ export default {
           btn: {
             reset: "重置",
             submit: "提交"
-          }
+          },
+          width: "宽",
+          height: "高"
         };
       }
     },
@@ -169,7 +182,9 @@ export default {
                   },
                   formName: "image0",
                   formData: {
-                    content: ""
+                    content: "",
+                    width: "",
+                    height: ""
                   },
                   formRules: {
                     content: [
@@ -186,7 +201,9 @@ export default {
                   desc: "支持png、jpg、gif、svg、webp",
                   formName: "image1",
                   formData: {
-                    content: ""
+                    content: "",
+                    width: "",
+                    height: ""
                   },
                   formRules: {
                     content: [
@@ -201,9 +218,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${
-                  data.content
-                }"></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
               }
             }
           },
@@ -255,9 +270,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${
-                  data.content
-                }" controls></audio></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
               }
             }
           },
@@ -286,6 +299,8 @@ export default {
                   formName: "video0",
                   formData: {
                     content: "",
+                    width: "",
+                    height: "",
                     poster: ""
                   },
                   formRules: {
@@ -304,6 +319,8 @@ export default {
                   formName: "video1",
                   formData: {
                     content: "",
+                    width: "",
+                    height: "",
                     poster: ""
                   },
                   formRules: {
@@ -320,13 +337,9 @@ export default {
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
-                  data.content = `<video controls src="${
-                    data.content
-                  }" poster="${data.poster}"></video>`;
+                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
                 }
-                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${
-                  data.content
-                }</p>`;
+                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
               }
             }
           }
@@ -455,6 +468,18 @@ export default {
     text-align: center;
     color: #cccccc;
   }
+
+  .el-tinymce-dialog-width-height {
+    margin-top: 10px;
+    span {
+      margin-right: 20px;
+    }
+    .el-input {
+      width: 60px;
+      margin-left: 10px;
+    }
+  }
+
   .el-tinymce-dialog-upload {
     text-align: center;
   }

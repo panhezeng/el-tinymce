@@ -96,7 +96,9 @@ const list = [
           },
           formName: "image0",
           formData: {
-            content: ""
+            content: "",
+            width: "",
+            height: ""
           },
           formRules: {
             content: [
@@ -113,7 +115,9 @@ const list = [
           desc: "支持png、jpg、gif、svg、webp",
           formName: "image1",
           formData: {
-            content: ""
+            content: "",
+            width: "",
+            height: ""
           },
           formRules: {
             content: [
@@ -128,9 +132,7 @@ const list = [
         }
       ],
       template(data) {
-        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${
-          data.content
-        }"></p>`;
+        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
       }
     }
   },
@@ -182,9 +184,7 @@ const list = [
         }
       ],
       template(data) {
-        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${
-          data.content
-        }" controls></audio></p>`;
+        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
       }
     }
   },
@@ -213,6 +213,8 @@ const list = [
           formName: "video0",
           formData: {
             content: "",
+            width: "",
+            height: "",
             poster: ""
           },
           formRules: {
@@ -231,6 +233,8 @@ const list = [
           formName: "video1",
           formData: {
             content: "",
+            width: "",
+            height: "",
             poster: ""
           },
           formRules: {
@@ -247,13 +251,9 @@ const list = [
       ],
       template(data) {
         if (/\.(mp4|webm)$/.test(data.content)) {
-          data.content = `<video controls src="${data.content}" poster="${
-            data.poster
-          }"></video>`;
+          data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
         }
-        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${
-          data.content
-        }</p>`;
+        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
       }
     }
   }

@@ -105,7 +105,9 @@ export default {
           btn: {
             reset: "重置",
             submit: "提交"
-          }
+          },
+          width: "宽",
+          height: "高"
         };
       }
     },
@@ -130,7 +132,9 @@ export default {
                   },
                   formName: "image0",
                   formData: {
-                    content: ""
+                    content: "",
+                    width: "",
+                    height: ""
                   },
                   formRules: {
                     content: [
@@ -147,7 +151,9 @@ export default {
                   desc: "支持png、jpg、gif、svg、webp",
                   formName: "image1",
                   formData: {
-                    content: ""
+                    content: "",
+                    width: "",
+                    height: ""
                   },
                   formRules: {
                     content: [
@@ -162,7 +168,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}"></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
               }
             }
           },
@@ -243,6 +249,8 @@ export default {
                   formName: "video0",
                   formData: {
                     content: "",
+                    width: "",
+                    height: "",
                     poster: ""
                   },
                   formRules: {
@@ -261,6 +269,8 @@ export default {
                   formName: "video1",
                   formData: {
                     content: "",
+                    width: "",
+                    height: "",
                     poster: ""
                   },
                   formRules: {
@@ -277,7 +287,7 @@ export default {
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
-                  data.content = `<video controls src="${data.content}" poster="${data.poster}"></video>`;
+                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
                 }
                 return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
               }
