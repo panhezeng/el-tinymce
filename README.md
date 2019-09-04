@@ -14,8 +14,6 @@
 
 首先请按 element-ui 官方文档安装 element-ui，确保能正常使用 element-ui
 
-打包 polyfills 应当是最终使用组件的应用的责任
-
 index.vue
 
 ```vue
