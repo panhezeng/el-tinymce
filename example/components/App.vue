@@ -3,12 +3,12 @@
     <h1>上传的mock演示，response永远是一样的数据</h1>
     <el-tinymce :content.sync="content" @content-change="contentChange" />
     <el-tinymce :content.sync="content" />
-    <el-tinymce
-      :i18n="i18n"
-      :list="list"
-      :content.sync="content"
-      url="https://unpkg.com/tinymce@~5"
-    />
+    <!--    <el-tinymce-->
+    <!--      :i18n="i18n"-->
+    <!--      :list="list"-->
+    <!--      :content.sync="content"-->
+    <!--      url="https://unpkg.com/tinymce@~5"-->
+    <!--    />-->
   </div>
 </template>
 
@@ -132,7 +132,7 @@ const list = [
         }
       ],
       template(data) {
-        return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
+        return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
       }
     }
   },
@@ -184,7 +184,7 @@ const list = [
         }
       ],
       template(data) {
-        return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
+        return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls></audio></p>`;
       }
     }
   },
@@ -253,7 +253,7 @@ const list = [
         if (/\.(mp4|webm)$/.test(data.content)) {
           data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
         }
-        return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
+        return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
       }
     }
   }
@@ -263,25 +263,25 @@ const uploadProps = {
   placeholder: "File link"
 };
 
-// window.ElSingleUploadOptions = { upload: upload };
-// require("../../src");
+window.ElSingleUploadOptions = { upload: upload };
+require("../../src");
 
-const ElTinymce = () => {
-  return import("../../dist/el-tinymce.min").then(res => {
-    Object.assign(res.props.upload, {
-      required: false,
-      default: upload
-    });
-
-    //      Object.assign(res.components.Side.props.i18n, i18n)
-
-    return Promise.resolve(res);
-  });
-};
+// const ElTinymce = () => {
+//   return import("../../dist/el-tinymce.min").then(res => {
+//     Object.assign(res.props.upload, {
+//       required: false,
+//       default: upload
+//     });
+//
+//     //      Object.assign(res.components.Side.props.i18n, i18n)
+//
+//     return Promise.resolve(res);
+//   });
+// };
 
 export default {
   name: "App",
-  components: { ElTinymce },
+  // components: { ElTinymce },
   data() {
     return {
       i18n,

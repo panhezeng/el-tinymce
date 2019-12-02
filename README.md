@@ -166,7 +166,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
               }
             }
           },
@@ -218,7 +218,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls></audio></p>`;
               }
             }
           },
@@ -287,7 +287,7 @@ export default {
                 if (/\.(mp4|webm)$/.test(data.content)) {
                   data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
                 }
-                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
+                return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
               }
             }
           }

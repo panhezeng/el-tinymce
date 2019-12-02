@@ -1,18 +1,18 @@
 <template>
-  <div class="el-tinymce-side" v-if="sideShow">
+  <div class="el-tinymce-side" v-if="sideVisible">
     <div class="el-tinymce-assets-title">{{ i18n.resource }}</div>
     <div class="el-tinymce-assets-list">
-      <template v-for="(item, index) in list" v-if="itemShow[item.type]">
+      <template v-for="(item, index) in list" v-if="itemVisible[item.type]">
         <div
           :class="`el-tinymce-assets-item el-tinymce-assets-item-${item.type}`"
-          @click="dialogShow = item.type"
+          @click="dialogOpen(item, index)"
         >
           <i class="el-tinymce-assets-item-icon"></i>{{ item.title }}
         </div>
         <el-dialog
           :key="index"
           :title="item.title"
-          :visible="dialogShow === item.type"
+          :visible="dialogVisible === item.type"
           @close="dialogClose(index)"
           class="el-tinymce-dialog"
         >
@@ -46,7 +46,7 @@
                 <el-form-item
                   label=""
                   prop="content"
-                  class="el-tinymce-dialog-upload"
+                  class="upload"
                   :class="{ 'two-col': tab.formData.hasOwnProperty('poster') }"
                 >
                   <el-single-upload
@@ -59,7 +59,7 @@
                   <el-input v-else v-model="tab.formData.content" />
                   <div
                     v-if="tab.formData.hasOwnProperty('width')"
-                    class="el-tinymce-dialog-width-height"
+                    class="width-height"
                   >
                     <span
                       >{{ i18n.width
@@ -68,10 +68,30 @@
                       >{{ i18n.height }}<el-input v-model="tab.formData.height"
                     /></span>
                   </div>
-                  <div class="el-tinymce-dialog-desc">{{ tab.desc }}</div>
+                  <div
+                    class="align"
+                    v-show="!/<\/iframe>$/.test(tab.formData.content)"
+                  >
+                    {{ i18n.align.title }}
+                    <el-select
+                      v-model="tab.formData.align"
+                      placeholder="请选择"
+                      style="margin-left: 10px; width: 150px;"
+                      @change="alignChange(tab.formData)"
+                    >
+                      <el-option
+                        v-for="item in alignOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select>
+                  </div>
+                  <div class="desc">{{ tab.desc }}</div>
                 </el-form-item>
-                <el-form-item class="el-tinymce-dialog-btn">
-                  <el-button @click="reset($refs[tab.formName][0])">{{
+                <el-form-item class="btn">
+                  <el-button @click="reset(tab)">{{
                     i18n.btn.reset
                   }}</el-button>
                   <el-button
@@ -104,7 +124,9 @@ import {
   Form,
   FormItem,
   Input,
-  Button
+  Button,
+  Select,
+  Option
 } from "element-ui";
 
 export default {
@@ -117,7 +139,9 @@ export default {
     "el-form": Form,
     "el-form-item": FormItem,
     "el-button": Button,
-    "el-input": Input
+    "el-input": Input,
+    "el-select": Select,
+    "el-option": Option
   },
   inheritAttrs: false,
   props: {
@@ -157,7 +181,16 @@ export default {
             submit: "提交"
           },
           width: "宽",
-          height: "高"
+          height: "高",
+          align: {
+            title: "排版方式",
+            default: "默认",
+            top: "文字上对齐",
+            middle: "文字中对齐",
+            bottom: "文字下对齐",
+            left: "文字环绕在右侧",
+            right: "文字环绕在左侧"
+          }
         };
       }
     },
@@ -184,7 +217,9 @@ export default {
                   formData: {
                     content: "",
                     width: "",
-                    height: ""
+                    height: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -203,7 +238,9 @@ export default {
                   formData: {
                     content: "",
                     width: "",
-                    height: ""
+                    height: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -218,7 +255,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image" style="text-align: center;" ><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></p>`;
               }
             }
           },
@@ -238,7 +275,9 @@ export default {
                   },
                   formName: "audio0",
                   formData: {
-                    content: ""
+                    content: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -255,7 +294,9 @@ export default {
                   desc: "支持mp3、ogg、wav、flac、aac",
                   formName: "audio1",
                   formData: {
-                    content: ""
+                    content: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -270,7 +311,7 @@ export default {
                 }
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-audio" style="text-align: center;" ><audio src="${data.content}" controls></audio></p>`;
+                return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls style="${data.alignStyle}"></audio></p>`;
               }
             }
           },
@@ -301,7 +342,9 @@ export default {
                     content: "",
                     width: "",
                     height: "",
-                    poster: ""
+                    poster: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -321,7 +364,9 @@ export default {
                     content: "",
                     width: "",
                     height: "",
-                    poster: ""
+                    poster: "",
+                    align: "",
+                    alignStyle: ""
                   },
                   formRules: {
                     content: [
@@ -337,9 +382,9 @@ export default {
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
-                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
+                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></video>`;
                 }
-                return `<p class="el-tinymce-resource el-tinymce-video" style="text-align: center;" >${data.content}</p>`;
+                return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
               }
             }
           }
@@ -355,40 +400,95 @@ export default {
   data() {
     return {
       // 当前显示的资源弹出框，默认不显示
-      dialogShow: ""
+      dialogVisible: "",
+      formDataBackedUp: {},
+      alignOptions: [
+        {
+          label: this.i18n.align.default,
+          value: ""
+        },
+        {
+          label: this.i18n.align.left,
+          value: "left"
+        },
+        {
+          label: this.i18n.align.right,
+          value: "right"
+        },
+        {
+          label: this.i18n.align.top,
+          value: "top"
+        },
+        {
+          label: this.i18n.align.middle,
+          value: "middle"
+        },
+        {
+          label: this.i18n.align.bottom,
+          value: "bottom"
+        }
+      ]
     };
   },
   computed: {
-    sideShow() {
+    sideVisible() {
       return this.side && this.editor;
     },
-    itemShow() {
+    itemVisible() {
       return { image: this.image, audio: this.audio, video: this.video };
     }
   },
   methods: {
+    dialogOpen(item, index) {
+      const type = item.type;
+      this.dialogVisible = type;
+      if (!this.formDataBackedUp[type]) {
+        this.formDataBackedUp[type] = true;
+        const tabs = this.list[index].dialog.tabs;
+        tabs.forEach(tab => {
+          tab.formDataBackup = JSON.parse(JSON.stringify(tab.formData));
+        });
+      }
+    },
     dialogClose(index) {
       // 关闭弹出框
-      //        console.log(this.$refs)
       const tabs = this.list[index].dialog.tabs;
       tabs.forEach(tab => {
         this.reset(tab);
       });
-      this.dialogShow = "";
+      this.dialogVisible = "";
+    },
+    alignChange(data) {
+      switch (data.align) {
+        case "top":
+          data.alignStyle = "vertical-align:top;";
+          break;
+        case "middle":
+          data.alignStyle = "vertical-align:middle;";
+          break;
+        case "bottom":
+          data.alignStyle = "vertical-align:bottom;";
+          break;
+        case "left":
+          data.alignStyle = "float:left;";
+          break;
+        case "right":
+          data.alignStyle = "float:right;";
+          break;
+        default:
+          data.alignStyle = "";
+      }
     },
     reset(tab) {
-      for (const prop in tab.formData) {
-        if (tab.formData.hasOwnProperty(prop)) {
-          tab.formData[prop] = "";
-        }
+      if (tab.formDataBackup) {
+        tab.formData = JSON.parse(JSON.stringify(tab.formDataBackup));
       }
-      // this.$refs[tab.formName][0].resetFields();
     },
     submit(form, formData, template) {
       form.validate(valid => {
         if (valid) {
           this.editor.insertContent(template(formData));
-          this.dialogShow = "";
+          this.dialogVisible = "";
         } else {
           return false;
         }
@@ -468,13 +568,13 @@ export default {
   .el-tabs__header {
     margin: 0 0 5px;
   }
-  .el-tinymce-dialog-desc {
+  .desc {
     /*text-align: right;*/
     text-align: center;
     color: #cccccc;
   }
 
-  .el-tinymce-dialog-width-height {
+  .width-height {
     margin-top: 10px;
     span {
       margin-right: 20px;
@@ -484,11 +584,14 @@ export default {
       margin-left: 10px;
     }
   }
+  .align {
+    margin-top: 10px;
+  }
 
-  .el-tinymce-dialog-upload {
+  .upload {
     text-align: center;
   }
-  .el-tinymce-dialog-btn {
+  .btn {
     width: 100%;
     text-align: right;
     margin-top: 20px;

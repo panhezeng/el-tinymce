@@ -100,6 +100,29 @@ export default {
       // 获得初始化完成的编辑器实例
       this.editor = editor;
       this.setContent();
+      this.editor.on("ExecCommand", e => {
+        if (e.command === "indent" && this.editor) {
+          // 文字环绕，缩进必须用text-indent，tinymce默认的缩进功能是用padding实现的
+          const iDom = this.editor.selection.getNode();
+          if (
+            this.editor.dom.hasClass(iDom, "el-tinymce-resource") &&
+            iDom.firstElementChild &&
+            this.editor.dom.getStyle(iDom.firstElementChild, "float")
+          ) {
+            const pleft = this.editor.dom.getStyle(iDom, "padding-left");
+            const tIndext = this.editor.dom.getStyle(iDom, "text-indent");
+            const tIndextNew = tIndext
+              ? Number(pleft.replace("px", "")) +
+                Number(tIndext.replace("px", "")) +
+                "px"
+              : pleft;
+            this.editor.dom.setStyles(iDom, {
+              "padding-left": "0px",
+              "text-indent": tIndextNew
+            });
+          }
+        }
+      });
     },
     setContent() {
       // 如果组件内容和父组件传入的内容不一样
@@ -119,6 +142,7 @@ export default {
 <style lang="less">
 .el-tinymce {
   display: flex;
+
   .vue-tinymce {
     flex: 1;
   }
