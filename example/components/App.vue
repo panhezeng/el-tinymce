@@ -3,12 +3,12 @@
     <h1>上传的mock演示，response永远是一样的数据</h1>
     <el-tinymce :content.sync="content" @content-change="contentChange" />
     <el-tinymce :content.sync="content" />
-    <!--    <el-tinymce-->
-    <!--      :i18n="i18n"-->
-    <!--      :list="list"-->
-    <!--      :content.sync="content"-->
-    <!--      url="https://unpkg.com/tinymce@~5"-->
-    <!--    />-->
+    <el-tinymce
+      :i18n="i18n"
+      :list="list"
+      :content.sync="content"
+      url="https://unpkg.com/tinymce@~5"
+    />
   </div>
 </template>
 
@@ -76,6 +76,17 @@ const i18n = {
   btn: {
     reset: "reset",
     submit: "submit"
+  },
+  width: "宽",
+  height: "高",
+  align: {
+    title: "排版方式",
+    default: "默认",
+    top: "文字上对齐",
+    middle: "文字中对齐",
+    bottom: "文字下对齐",
+    left: "文字环绕在右侧",
+    right: "文字环绕在左侧"
   }
 };
 

@@ -12,7 +12,7 @@
         <el-dialog
           :key="index"
           :title="item.title"
-          :visible="dialogVisible === item.type"
+          :visible="currentDialogVisible === item.type"
           @close="dialogClose(index)"
           class="el-tinymce-dialog"
         >
@@ -400,7 +400,7 @@ export default {
   data() {
     return {
       // 当前显示的资源弹出框，默认不显示
-      dialogVisible: "",
+      currentDialogVisible: "",
       formDataBackedUp: {},
       alignOptions: [
         {
@@ -441,7 +441,7 @@ export default {
   methods: {
     dialogOpen(item, index) {
       const type = item.type;
-      this.dialogVisible = type;
+      this.currentDialogVisible = type;
       if (!this.formDataBackedUp[type]) {
         this.formDataBackedUp[type] = true;
         const tabs = this.list[index].dialog.tabs;
@@ -456,7 +456,7 @@ export default {
       tabs.forEach(tab => {
         this.reset(tab);
       });
-      this.dialogVisible = "";
+      this.currentDialogVisible = "";
     },
     alignChange(data) {
       switch (data.align) {
@@ -488,7 +488,7 @@ export default {
       form.validate(valid => {
         if (valid) {
           this.editor.insertContent(template(formData));
-          this.dialogVisible = "";
+          this.currentDialogVisible = "";
         } else {
           return false;
         }
