@@ -1,18 +1,13 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const BeforeRunWebpackPlugin = require("@panhezeng/before-run-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const shell = require("shelljs");
+
+const outputPath = path.resolve(__dirname, "../docs");
 
 const config = {
-  entry: "./example/main.js",
   output: {
-    path: path.resolve(__dirname, "docs"),
-    filename: "example.js",
-    chunkFilename: "[id].bundle.js"
-  },
-  externals: {
-    vue: "Vue",
-    "element-ui": "ELEMENT",
-    "@panhezeng/ucloud-ufile": "UCloudUFile"
+    path: outputPath
   },
   module: {
     rules: [
@@ -55,13 +50,26 @@ const config = {
       }
     ]
   },
-  plugins: [new VueLoaderPlugin()],
-  devServer: {}
+  resolve: {
+    extensions: [".js", ".json", ".jsx", ".css", ".vue"]
+  },
+  externals: {
+    vue: "Vue",
+    "element-ui": "ELEMENT",
+    "@panhezeng/ucloud-ufile": "UCloudUFile"
+  },
+  plugins: [new VueLoaderPlugin()]
 };
 
 module.exports = (env, argv) => {
+  const HtmlWebpackPluginOptions = {
+    script: "",
+    template: "index.html"
+  };
   if (argv.mode === "production") {
-    config.plugins.push(new BeforeRunWebpackPlugin({ sed: "vue" }));
+    shell.rm("-rf", outputPath);
+    HtmlWebpackPluginOptions.script = ".min";
   }
+  config.plugins.push(new HtmlWebpackPlugin(HtmlWebpackPluginOptions));
   return config;
 };

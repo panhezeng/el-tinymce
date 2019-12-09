@@ -275,10 +275,10 @@ const uploadProps = {
 };
 
 window.ElSingleUploadOptions = { upload: upload };
-require("../../src");
-
+require("../../../src");
+// import { ElTinymce } from "../../../src";
 // const ElTinymce = () => {
-//   return import("../../dist/el-tinymce.min").then(res => {
+//   return import("../../../dist/el-tinymce.min").then(res => {
 //     Object.assign(res.props.upload, {
 //       required: false,
 //       default: upload

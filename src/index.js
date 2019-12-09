@@ -1,4 +1,6 @@
-export const ElTinymce = require("./ElTinymce/index.vue").default;
+// export const ElTinymce = require("./ElTinymce/index.vue").default;
+import index from "./ElTinymce/index";
+export const ElTinymce = index;
 
 let Vue;
 
@@ -15,7 +17,7 @@ function install(
 
   Vue = _Vue;
 
-  if (Object.prototype.toString.call(options) === "[object Object]") {
+  if (/^\[object Object\]$/.test(Object.prototype.toString.call(options))) {
     if (
       /^\[object [^F]*Function\]$/.test(
         Object.prototype.toString.call(options.upload)
