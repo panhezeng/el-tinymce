@@ -16,8 +16,9 @@
   "main": "",
   "browser": "",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --hot --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js"
+    "lint": "eslint --fix 'src/**'",
+    "dev": "webpack-dev-server --mode development --open --hot",
+    "build": "npm run lint && webpack --mode production"
   },
   "bin": {},
   "repository": {},
@@ -69,7 +70,7 @@
     }
   },
   "lint-staged": {
-    "src/**.{js,vue}": [
+    "src/**": [
       "eslint --fix",
       "git add"
     ],

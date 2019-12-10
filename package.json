@@ -30,7 +30,8 @@
   "main": "",
   "browser": "dist/el-tinymce.min.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "lint": "eslint --fix 'src/**'",
+    "build": "npm run lint && webpack --mode production",
     "install:example": "cd example && npm install",
     "dev:example": "cd example && npm run dev",
     "build:example": "cd example && npm run build"
@@ -91,7 +92,7 @@
     }
   },
   "lint-staged": {
-    "src/**.{js,vue}": [
+    "src/**": [
       "eslint --fix",
       "git add"
     ],
