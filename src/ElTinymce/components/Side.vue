@@ -1,32 +1,35 @@
 <template>
-  <div class="el-tinymce-side" v-if="sideVisible">
+  <div v-if="sideVisible" class="el-tinymce-side">
     <div class="el-tinymce-assets-title">{{ i18n.resource }}</div>
     <div class="el-tinymce-assets-list">
-      <template v-for="(item, index) in list" v-if="itemVisible[item.type]">
+      <template v-for="(item, index) in list">
         <div
+          v-if="itemVisible[item.type]"
+          :key="`div-${index}`"
           :class="`el-tinymce-assets-item el-tinymce-assets-item-${item.type}`"
           @click="dialogOpen(item, index)"
         >
           <i class="el-tinymce-assets-item-icon"></i>{{ item.title }}
         </div>
         <el-dialog
-          :key="index"
+          v-if="itemVisible[item.type]"
+          :key="`dialog-${index}`"
           :title="item.title"
           :visible="currentDialogVisible === item.type"
-          @close="dialogClose(index)"
           class="el-tinymce-dialog"
+          @close="dialogClose(index)"
         >
           <el-tabs v-model="item.dialog.activeName">
             <el-tab-pane
+              v-for="(tab, tabIndex) in item.dialog.tabs"
+              :key="tabIndex"
               :label="tab.title"
               :name="item.type + tabIndex"
-              :key="tabIndex"
-              v-for="(tab, tabIndex) in item.dialog.tabs"
             >
               <el-form
+                :ref="tab.formName"
                 :model="tab.formData"
                 :rules="tab.formRules"
-                :ref="tab.formName"
                 label-width="0"
                 label-position="top"
               >
@@ -47,7 +50,9 @@
                   label=""
                   prop="content"
                   class="upload"
-                  :class="{ 'two-col': tab.formData.hasOwnProperty('poster') }"
+                  :class="{
+                    'two-col': tab.formData.hasOwnProperty('poster')
+                  }"
                 >
                   <el-single-upload
                     v-if="tab.uploadProps"
@@ -69,8 +74,8 @@
                     /></span>
                   </div>
                   <div
-                    class="align"
                     v-show="!/<\/iframe>$/.test(tab.formData.content)"
+                    class="align"
                   >
                     {{ i18n.align.title }}
                     <el-select
@@ -80,10 +85,10 @@
                       @change="alignChange(tab.formData)"
                     >
                       <el-option
-                        v-for="item in alignOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
+                        v-for="alignOption in alignOptions"
+                        :key="alignOption.value"
+                        :label="alignOption.label"
+                        :value="alignOption.value"
                       >
                       </el-option>
                     </el-select>

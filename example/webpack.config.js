@@ -1,7 +1,7 @@
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const shell = require("shelljs");
 
 const outputPath = path.resolve(__dirname, "../docs");
 
@@ -51,14 +51,23 @@ const config = {
     ]
   },
   resolve: {
-    extensions: [".js", ".json", ".jsx", ".css", ".vue"]
+    extensions: [
+      ".js",
+      ".ts",
+      ".jsx",
+      ".vue",
+      ".css",
+      ".less",
+      ".scss",
+      ".json"
+    ]
   },
   externals: {
     vue: "Vue",
     "element-ui": "ELEMENT",
     "@panhezeng/ucloud-ufile": "UCloudUFile"
   },
-  plugins: [new VueLoaderPlugin()]
+  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()]
 };
 
 module.exports = (env, argv) => {
@@ -67,7 +76,6 @@ module.exports = (env, argv) => {
     template: "index.html"
   };
   if (argv.mode === "production") {
-    shell.rm("-rf", outputPath);
     HtmlWebpackPluginOptions.script = ".min";
   }
   config.plugins.push(new HtmlWebpackPlugin(HtmlWebpackPluginOptions));

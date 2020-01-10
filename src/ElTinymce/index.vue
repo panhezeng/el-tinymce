@@ -77,8 +77,10 @@ export default {
         {
           height: this.height,
           readonly: this.readonly,
+          menubar: "file edit view insert format tools table",
+          // menubar: false,
           toolbar1:
-            "code | undo redo | fontsizeselect fontselect | blockquote hr | removeformat link unlink pastetext preview",
+            "code | undo redo | fontsizeselect fontselect | blockquote hr | removeformat link unlink pastetext | pagebreak | charmap emoticons | fullscreen preview save print",
           init_instance_callback: this.init_instance_callback
         },
         this.config

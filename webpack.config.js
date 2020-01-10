@@ -1,5 +1,5 @@
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   output: {
     filename: "el-tinymce.min.js",
@@ -50,7 +50,16 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".json", ".jsx", ".css", ".vue"]
+    extensions: [
+      ".js",
+      ".ts",
+      ".jsx",
+      ".vue",
+      ".css",
+      ".less",
+      ".scss",
+      ".json"
+    ]
   },
   externals: {
     "@panhezeng/vue-tinymce": "VueTinymce",
@@ -58,5 +67,5 @@ module.exports = {
     vue: "Vue",
     "element-ui": "ELEMENT"
   },
-  plugins: [new VueLoaderPlugin()]
+  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()]
 };
