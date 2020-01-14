@@ -83,8 +83,8 @@
     "element-ui": "^2.13.0"
   },
   "engines": {
-    "node": "latest",
-    "npm": "latest"
+    "node": ">=13",
+    "npm": ">=6"
   },
   "private": false,
   "husky": {
