@@ -62,10 +62,30 @@ module.exports = {
     ]
   },
   externals: {
-    "@panhezeng/vue-tinymce": "VueTinymce",
-    "@panhezeng/el-single-upload": "ElSingleUpload",
-    vue: "Vue",
-    "element-ui": "ELEMENT"
+    "@panhezeng/vue-tinymce": {
+      commonjs: "@panhezeng/vue-tinymce",
+      commonjs2: "@panhezeng/vue-tinymce",
+      amd: "@panhezeng/vue-tinymce",
+      root: "VueTinymce"
+    },
+    "@panhezeng/el-single-upload": {
+      commonjs: "@panhezeng/el-single-upload",
+      commonjs2: "@panhezeng/el-single-upload",
+      amd: "@panhezeng/el-single-upload",
+      root: "ElSingleUpload"
+    },
+    vue: {
+      commonjs: "vue",
+      commonjs2: "vue",
+      amd: "vue",
+      root: "Vue"
+    },
+    "element-ui": {
+      commonjs: "element-ui",
+      commonjs2: "element-ui",
+      amd: "element-ui",
+      root: "ELEMENT"
+    }
   },
   plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()]
 };
