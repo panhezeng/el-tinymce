@@ -102,11 +102,11 @@ export default {
       // 获得初始化完成的编辑器实例
       this.editor = editor;
       this.setContent();
-      this.editor.on("keyup", e => {
-        if (e.key === "Enter" && this.editor) {
-          const selectionDom = this.editor.selection.getNode();
-          if (this.editor.dom.hasClass(selectionDom, "el-tinymce-resource")) {
-            this.editor.dom.removeAllAttribs(selectionDom);
+      this.editor.on("NewBlock", e => {
+        if (this.editor) {
+          // 光标在插入资源后回车时，NewBlock p元素会带上资源容器p的class，这里去掉，避免出现非预期的样式
+          if (this.editor.dom.hasClass(e.newBlock, "el-tinymce-resource")) {
+            this.editor.dom.removeAllAttribs(e.newBlock);
           }
         }
       });
