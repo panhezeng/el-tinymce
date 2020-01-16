@@ -103,11 +103,15 @@ export default {
       this.editor = editor;
       this.setContent();
       this.editor.on("NewBlock", e => {
-        if (this.editor) {
-          // 光标在插入资源后回车时，NewBlock p元素会带上资源容器p的class，这里去掉，避免出现非预期的样式
-          if (this.editor.dom.hasClass(e.newBlock, "el-tinymce-resource")) {
-            this.editor.dom.removeAllAttribs(e.newBlock);
-          }
+        // 光标在插入资源后回车时，NewBlock p元素会带上资源容器p的class，这里去掉，避免出现非预期的样式
+        const className = e.newBlock.getAttribute("class");
+        if (
+          /^\[object String\]$/.test(
+            Object.prototype.toString.call(className)
+          ) &&
+          className.indexOf("el-tinymce-resource") > -1
+        ) {
+          e.newBlock.removeAttribute("class");
         }
       });
     },
