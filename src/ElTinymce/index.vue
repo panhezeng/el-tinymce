@@ -52,7 +52,7 @@ export default {
     // 编辑器高度
     height: {
       type: Number,
-      default: 230
+      default: 320
     },
     // 只读
     readonly: {
@@ -130,7 +130,7 @@ export default {
 .el-tinymce {
   display: flex;
   .vue-tinymce {
-    flex: 1;
+    flex: 1 1 auto;
   }
 }
 </style>

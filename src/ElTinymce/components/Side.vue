@@ -505,6 +505,7 @@ export default {
 <style lang="less">
 .el-tinymce-side {
   width: 140px;
+  min-width: 140px;
   margin: 0 0 0 16px;
   .el-tinymce-assets-title {
     line-height: 39px;
