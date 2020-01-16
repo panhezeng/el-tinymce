@@ -75,7 +75,7 @@ export default {
     configInternal() {
       return Object.assign(
         {
-          height: this.height,
+          min_height: this.height,
           readonly: this.readonly,
           menubar: "file edit view insert format tools table",
           // menubar: false,
