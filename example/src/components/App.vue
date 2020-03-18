@@ -3,12 +3,12 @@
     <h1>上传的mock演示，response永远是一样的数据</h1>
     <el-tinymce :content.sync="content" @content-change="contentChange" />
     <el-tinymce :content.sync="content" />
-    <el-tinymce
-      :i18n="i18n"
-      :list="list"
-      :content.sync="content"
-      url="https://unpkg.com/tinymce@~5"
-    />
+    <!--    <el-tinymce-->
+    <!--      :i18n="i18n"-->
+    <!--      :list="list"-->
+    <!--      :content.sync="content"-->
+    <!--      url="https://unpkg.com/tinymce@~5"-->
+    <!--    />-->
   </div>
 </template>
 

@@ -52,7 +52,7 @@ export default {
     // 编辑器高度
     height: {
       type: Number,
-      default: 320
+      default: 400
     },
     // 只读
     readonly: {
