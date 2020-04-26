@@ -25,7 +25,7 @@ function install(
     ) {
       Object.assign(ElTinymce.props.upload, {
         required: false,
-        default: options.upload
+        default: options.upload,
       });
     }
   }

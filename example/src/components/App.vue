@@ -37,7 +37,7 @@ function upload(option) {
   return new Promise((resolve, reject) => {
     ufile.PREFIX = `example/${file.type}`;
 
-    const success = res => {
+    const success = (res) => {
       if (Object.prototype.toString.call(res) !== "[object Object]") {
         res = { Key: file.name };
       }
@@ -46,11 +46,11 @@ function upload(option) {
       resolve({ data: res });
     };
 
-    const error = res => {
+    const error = (res) => {
       reject(new Error("上传失败"));
     };
 
-    const progress = res => {
+    const progress = (res) => {
       if (Object.prototype.toString.call(res) !== "[object Object]") {
         res = { value: 0 };
       }
@@ -75,7 +75,7 @@ const i18n = {
   resource: "Resource",
   btn: {
     reset: "reset",
-    submit: "submit"
+    submit: "submit",
   },
   width: "宽",
   height: "高",
@@ -86,8 +86,8 @@ const i18n = {
     middle: "文字中对齐",
     bottom: "文字下对齐",
     left: "文字环绕在右侧",
-    right: "文字环绕在左侧"
-  }
+    right: "文字环绕在左侧",
+  },
 };
 
 const list = [
@@ -103,23 +103,23 @@ const list = [
           uploadProps: {
             accept: "image/*",
             size: 10240,
-            placeholder: "图片链接地址"
+            placeholder: "图片链接地址",
           },
           formName: "image0",
           formData: {
             content: "",
             width: "",
-            height: ""
+            height: "",
           },
           formRules: {
             content: [
               {
                 required: true,
                 message: "请上传图片",
-                trigger: "blur"
-              }
-            ]
-          }
+                trigger: "blur",
+              },
+            ],
+          },
         },
         {
           title: "外链图片",
@@ -128,7 +128,7 @@ const list = [
           formData: {
             content: "",
             width: "",
-            height: ""
+            height: "",
           },
           formRules: {
             content: [
@@ -136,16 +136,16 @@ const list = [
                 required: true,
                 message: "请输入有效图片链接",
                 trigger: "blur",
-                pattern: /\.(png|jpe?g|gif|svg|webp)$/
-              }
-            ]
-          }
-        }
+                pattern: /\.(png|jpe?g|gif|svg|webp)$/,
+              },
+            ],
+          },
+        },
       ],
       template(data) {
         return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
-      }
-    }
+      },
+    },
   },
   {
     type: "audio",
@@ -159,28 +159,28 @@ const list = [
           uploadProps: {
             accept: ".mp3,.ogg,.wav,.flac,.aac",
             size: 102400,
-            placeholder: "音频链接地址"
+            placeholder: "音频链接地址",
           },
           formName: "audio0",
           formData: {
-            content: ""
+            content: "",
           },
           formRules: {
             content: [
               {
                 required: true,
                 message: "请上传音频",
-                trigger: "blur"
-              }
-            ]
-          }
+                trigger: "blur",
+              },
+            ],
+          },
         },
         {
           title: "外链音频",
           desc: "支持mp3、ogg、wav、flac、aac",
           formName: "audio1",
           formData: {
-            content: ""
+            content: "",
           },
           formRules: {
             content: [
@@ -188,16 +188,16 @@ const list = [
                 required: true,
                 message: "请输入有效音频链接",
                 trigger: "blur",
-                pattern: /\.(mp3|ogg|wav|flac|aac)$/
-              }
-            ]
-          }
-        }
+                pattern: /\.(mp3|ogg|wav|flac|aac)$/,
+              },
+            ],
+          },
+        },
       ],
       template(data) {
         return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls></audio></p>`;
-      }
-    }
+      },
+    },
   },
   {
     type: "video",
@@ -209,8 +209,8 @@ const list = [
         uploadProps: {
           accept: "image/*",
           size: 10240,
-          placeholder: "视频封面图片链接地址"
-        }
+          placeholder: "视频封面图片链接地址",
+        },
       },
       tabs: [
         {
@@ -219,24 +219,24 @@ const list = [
           uploadProps: {
             accept: ".mp4,.webm",
             size: 1048576,
-            placeholder: "视频链接地址"
+            placeholder: "视频链接地址",
           },
           formName: "video0",
           formData: {
             content: "",
             width: "",
             height: "",
-            poster: ""
+            poster: "",
           },
           formRules: {
             content: [
               {
                 required: true,
                 message: "请上传视频",
-                trigger: "blur"
-              }
-            ]
-          }
+                trigger: "blur",
+              },
+            ],
+          },
         },
         {
           title: "外链视频",
@@ -246,7 +246,7 @@ const list = [
             content: "",
             width: "",
             height: "",
-            poster: ""
+            poster: "",
           },
           formRules: {
             content: [
@@ -254,24 +254,24 @@ const list = [
                 required: true,
                 message: "请输入有效视频链接或代码",
                 trigger: "blur",
-                pattern: /\.(mp4|webm)|<\/iframe>$/
-              }
-            ]
-          }
-        }
+                pattern: /\.(mp4|webm)|<\/iframe>$/,
+              },
+            ],
+          },
+        },
       ],
       template(data) {
         if (/\.(mp4|webm)$/.test(data.content)) {
           data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
         }
         return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
-      }
-    }
-  }
+      },
+    },
+  },
 ];
 
 const uploadProps = {
-  placeholder: "File link"
+  placeholder: "File link",
 };
 
 window.ElSingleUploadOptions = { upload: upload };
@@ -299,13 +299,13 @@ export default {
       i18n,
       list,
       uploadProps,
-      content: ""
+      content: "",
     };
   },
   methods: {
     contentChange(content) {
       console.log(content, "contentChange");
-    }
-  }
+    },
+  },
 };
 </script>

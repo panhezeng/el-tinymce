@@ -51,7 +51,7 @@
                   prop="content"
                   class="upload"
                   :class="{
-                    'two-col': tab.formData.hasOwnProperty('poster')
+                    'two-col': tab.formData.hasOwnProperty('poster'),
                   }"
                 >
                   <el-single-upload
@@ -68,7 +68,7 @@
                   >
                     <span
                       >{{ i18n.width
-                      }}<el-input v-model="tab.formData.width"/></span
+                      }}<el-input v-model="tab.formData.width" /></span
                     ><span
                       >{{ i18n.height }}<el-input v-model="tab.formData.height"
                     /></span>
@@ -131,7 +131,7 @@ import {
   Input,
   Button,
   Select,
-  Option
+  Option,
 } from "element-ui";
 
 export default {
@@ -146,34 +146,34 @@ export default {
     "el-button": Button,
     "el-input": Input,
     "el-select": Select,
-    "el-option": Option
+    "el-option": Option,
   },
   inheritAttrs: false,
   props: {
     // 整个侧边栏是否显示
     side: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏图片项是否显示
     image: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏音频项是否显示
     audio: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏视频项是否显示
     video: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // tinymce实例
     editor: {
       type: null,
-      required: true
+      required: true,
     },
     // 侧边栏所有文本
     i18n: {
@@ -183,7 +183,7 @@ export default {
           resource: "资源",
           btn: {
             reset: "重置",
-            submit: "提交"
+            submit: "提交",
           },
           width: "宽",
           height: "高",
@@ -194,10 +194,10 @@ export default {
             middle: "文字中对齐",
             bottom: "文字下对齐",
             left: "文字环绕在右侧",
-            right: "文字环绕在左侧"
-          }
+            right: "文字环绕在左侧",
+          },
         };
-      }
+      },
     },
     // 侧边栏列表，dialog是该侧边按钮的弹出框数据
     list: {
@@ -216,7 +216,7 @@ export default {
                   uploadProps: {
                     accept: "image/*",
                     size: 10240,
-                    placeholder: "图片链接地址"
+                    placeholder: "图片链接地址",
                   },
                   formName: "image0",
                   formData: {
@@ -224,17 +224,17 @@ export default {
                     width: "",
                     height: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传图片",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链图片",
@@ -245,7 +245,7 @@ export default {
                     width: "",
                     height: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -253,16 +253,16 @@ export default {
                         required: true,
                         message: "请输入有效图片链接",
                         trigger: "blur",
-                        pattern: /\.(png|jpe?g|gif|svg|webp)$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(png|jpe?g|gif|svg|webp)$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
                 return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></p>`;
-              }
-            }
+              },
+            },
           },
           {
             type: "audio",
@@ -276,23 +276,23 @@ export default {
                   uploadProps: {
                     accept: ".mp3,.ogg,.wav,.flac,.aac",
                     size: 102400,
-                    placeholder: "音频链接地址"
+                    placeholder: "音频链接地址",
                   },
                   formName: "audio0",
                   formData: {
                     content: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传音频",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链音频",
@@ -301,7 +301,7 @@ export default {
                   formData: {
                     content: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -309,16 +309,16 @@ export default {
                         required: true,
                         message: "请输入有效音频链接",
                         trigger: "blur",
-                        pattern: /\.(mp3|ogg|wav|flac|aac)$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(mp3|ogg|wav|flac|aac)$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
                 return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls style="${data.alignStyle}"></audio></p>`;
-              }
-            }
+              },
+            },
           },
           {
             type: "video",
@@ -330,8 +330,8 @@ export default {
                 uploadProps: {
                   accept: "image/*",
                   size: 10240,
-                  placeholder: "视频封面图片链接地址"
-                }
+                  placeholder: "视频封面图片链接地址",
+                },
               },
               tabs: [
                 {
@@ -340,7 +340,7 @@ export default {
                   uploadProps: {
                     accept: ".mp4,.webm",
                     size: 1048576,
-                    placeholder: "视频链接地址"
+                    placeholder: "视频链接地址",
                   },
                   formName: "video0",
                   formData: {
@@ -349,17 +349,17 @@ export default {
                     height: "",
                     poster: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传视频",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链视频",
@@ -371,7 +371,7 @@ export default {
                     height: "",
                     poster: "",
                     align: "",
-                    alignStyle: ""
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -379,28 +379,28 @@ export default {
                         required: true,
                         message: "请输入有效视频链接或代码",
                         trigger: "blur",
-                        pattern: /\.(mp4|webm)|<\/iframe>$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(mp4|webm)|<\/iframe>$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
                   data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></video>`;
                 }
                 return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
-              }
-            }
-          }
+              },
+            },
+          },
         ];
-      }
+      },
     },
     // 上传文件的方法
     upload: {
       required: true,
-      type: Function
-    }
+      type: Function,
+    },
   },
   data() {
     return {
@@ -410,29 +410,29 @@ export default {
       alignOptions: [
         {
           label: this.i18n.align.default,
-          value: ""
+          value: "",
         },
         {
           label: this.i18n.align.left,
-          value: "left"
+          value: "left",
         },
         {
           label: this.i18n.align.right,
-          value: "right"
+          value: "right",
         },
         {
           label: this.i18n.align.top,
-          value: "top"
+          value: "top",
         },
         {
           label: this.i18n.align.middle,
-          value: "middle"
+          value: "middle",
         },
         {
           label: this.i18n.align.bottom,
-          value: "bottom"
-        }
-      ]
+          value: "bottom",
+        },
+      ],
     };
   },
   computed: {
@@ -441,7 +441,7 @@ export default {
     },
     itemVisible() {
       return { image: this.image, audio: this.audio, video: this.video };
-    }
+    },
   },
   methods: {
     dialogOpen(item, index) {
@@ -450,7 +450,7 @@ export default {
       if (!this.formDataBackedUp[type]) {
         this.formDataBackedUp[type] = true;
         const tabs = this.list[index].dialog.tabs;
-        tabs.forEach(tab => {
+        tabs.forEach((tab) => {
           tab.formDataBackup = JSON.parse(JSON.stringify(tab.formData));
         });
       }
@@ -458,7 +458,7 @@ export default {
     dialogClose(index) {
       // 关闭弹出框
       const tabs = this.list[index].dialog.tabs;
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         this.reset(tab);
       });
       this.currentDialogVisible = "";
@@ -490,7 +490,7 @@ export default {
       }
     },
     submit(form, formData, template) {
-      form.validate(valid => {
+      form.validate((valid) => {
         if (valid) {
           this.editor.insertContent(template(formData));
           this.currentDialogVisible = "";
@@ -498,8 +498,8 @@ export default {
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less">
