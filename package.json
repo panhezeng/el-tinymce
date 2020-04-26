@@ -28,7 +28,6 @@
     "README"
   ],
   "main": "dist/el-tinymce.min.js",
-  "browser": "dist/el-tinymce.min.js",
   "scripts": {
     "lint": "eslint --fix 'src/**/*.{js,ts,jsx,vue}'",
     "build": "npm run lint && webpack --mode production",
