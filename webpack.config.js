@@ -6,48 +6,48 @@ module.exports = {
     libraryTarget: "umd",
     umdNamedDefine: true,
     library: "ElTinymce",
-    libraryExport: "ElTinymce"
+    libraryExport: "ElTinymce",
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: "vue-loader"
+        use: "vue-loader",
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: "babel-loader",
       },
       {
         test: /\.(css|less)$/,
-        use: ["vue-style-loader", "css-loader", "less-loader"]
+        use: ["vue-style-loader", "css-loader", "less-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "img/[name].[hash:7].[ext]"
-        }
+          name: "img/[name].[hash:7].[ext]",
+        },
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "media/[name].[hash:7].[ext]"
-        }
+          name: "media/[name].[hash:7].[ext]",
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "fonts/[name].[hash:7].[ext]"
-        }
-      }
-    ]
+          name: "fonts/[name].[hash:7].[ext]",
+        },
+      },
+    ],
   },
   resolve: {
     extensions: [
@@ -58,34 +58,34 @@ module.exports = {
       ".css",
       ".less",
       ".scss",
-      ".json"
-    ]
+      ".json",
+    ],
   },
   externals: {
     "@panhezeng/vue-tinymce": {
       commonjs: "@panhezeng/vue-tinymce",
       commonjs2: "@panhezeng/vue-tinymce",
       amd: "@panhezeng/vue-tinymce",
-      root: "VueTinymce"
+      root: "VueTinymce",
     },
     "@panhezeng/el-single-upload": {
       commonjs: "@panhezeng/el-single-upload",
       commonjs2: "@panhezeng/el-single-upload",
       amd: "@panhezeng/el-single-upload",
-      root: "ElSingleUpload"
+      root: "ElSingleUpload",
     },
     vue: {
       commonjs: "vue",
       commonjs2: "vue",
       amd: "vue",
-      root: "Vue"
+      root: "Vue",
     },
     "element-ui": {
       commonjs: "element-ui",
       commonjs2: "element-ui",
       amd: "element-ui",
-      root: "ELEMENT"
-    }
+      root: "ELEMENT",
+    },
   },
-  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()]
+  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],
 };

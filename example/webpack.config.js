@@ -7,48 +7,48 @@ const outputPath = path.resolve(__dirname, "../docs");
 
 const config = {
   output: {
-    path: outputPath
+    path: outputPath,
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: "vue-loader"
+        use: "vue-loader",
       },
       {
         test: /\.js$/,
         exclude: /node_modules|dist/,
-        use: "babel-loader"
+        use: "babel-loader",
       },
       {
         test: /\.(css|less)$/,
-        use: ["vue-style-loader", "css-loader", "less-loader"]
+        use: ["vue-style-loader", "css-loader", "less-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "img/[name].[hash:7].[ext]"
-        }
+          name: "img/[name].[hash:7].[ext]",
+        },
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "media/[name].[hash:7].[ext]"
-        }
+          name: "media/[name].[hash:7].[ext]",
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: "url-loader",
         options: {
           limit: 10000,
-          name: "fonts/[name].[hash:7].[ext]"
-        }
-      }
-    ]
+          name: "fonts/[name].[hash:7].[ext]",
+        },
+      },
+    ],
   },
   resolve: {
     extensions: [
@@ -59,21 +59,21 @@ const config = {
       ".css",
       ".less",
       ".scss",
-      ".json"
-    ]
+      ".json",
+    ],
   },
   externals: {
     vue: "Vue",
     "element-ui": "ELEMENT",
-    "@panhezeng/ucloud-ufile": "UCloudUFile"
+    "@panhezeng/ucloud-ufile": "UCloudUFile",
   },
-  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()]
+  plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],
 };
 
 module.exports = (env, argv) => {
   const HtmlWebpackPluginOptions = {
     script: "",
-    template: "index.html"
+    template: "index.html",
   };
   if (argv.mode === "production") {
     HtmlWebpackPluginOptions.script = ".min";
