@@ -44,7 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.4",
     "@panhezeng/el-single-upload": "^3.0.2",
-    "@panhezeng/vue-tinymce": "^2.3.5"
+    "@panhezeng/vue-tinymce": "^2.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
