@@ -24,41 +24,41 @@ export default {
     // 父组件通过:content.sync同步富文本编辑器内容
     content: {
       type: String,
-      required: true
+      required: true,
     },
     // 触发content同步更新的tinymce Editor Events，其他https://www.tiny.cloud/docs/advanced/events/
     updateEvent: {
       type: String,
-      default: "beforeaddundo undo redo keyup"
+      default: "beforeaddundo undo redo keyup",
     },
     // tinymce依赖文件的cdn url
     url: {
       type: String,
-      default: "https://cdn.jsdelivr.net/npm/tinymce@~5"
+      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.4.0",
     },
     // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar3，可以使用该组件时写上 :config="{toolbar2:''}"
     config: {
       type: Object,
       default() {
         return {};
-      }
+      },
     },
     // 编辑器高度
     height: {
       type: Number,
-      default: 230
+      default: 500,
     },
     // 只读
     readonly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 上传文件的方法
     upload: {
       required: true,
-      type: Function
-    }
-  }
+      type: Function,
+    },
+  },
 };
 </script>
 ```
@@ -72,27 +72,27 @@ export default {
     // 整个侧边栏是否显示
     side: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏图片项是否显示
     image: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏音频项是否显示
     audio: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 侧边栏视频项是否显示
     video: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // tinymce实例
     editor: {
       type: null,
-      required: true
+      required: true,
     },
     // 侧边栏所有文本
     i18n: {
@@ -102,12 +102,21 @@ export default {
           resource: "资源",
           btn: {
             reset: "重置",
-            submit: "提交"
+            submit: "提交",
           },
           width: "宽",
-          height: "高"
+          height: "高",
+          align: {
+            title: "排版方式",
+            default: "默认",
+            top: "文字上对齐",
+            middle: "文字中对齐",
+            bottom: "文字下对齐",
+            left: "文字环绕在右侧",
+            right: "文字环绕在左侧",
+          },
         };
-      }
+      },
     },
     // 侧边栏列表，dialog是该侧边按钮的弹出框数据
     list: {
@@ -126,23 +135,25 @@ export default {
                   uploadProps: {
                     accept: "image/*",
                     size: 10240,
-                    placeholder: "图片链接地址"
+                    placeholder: "图片链接地址",
                   },
                   formName: "image0",
                   formData: {
                     content: "",
                     width: "",
-                    height: ""
+                    height: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传图片",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链图片",
@@ -151,7 +162,9 @@ export default {
                   formData: {
                     content: "",
                     width: "",
-                    height: ""
+                    height: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -159,16 +172,16 @@ export default {
                         required: true,
                         message: "请输入有效图片链接",
                         trigger: "blur",
-                        pattern: /\.(png|jpe?g|gif|svg|webp)$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(png|jpe?g|gif|svg|webp)$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}"></p>`;
-              }
-            }
+                return `<p class="el-tinymce-resource el-tinymce-image"><img src="${data.content}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></p>`;
+              },
+            },
           },
           {
             type: "audio",
@@ -182,28 +195,32 @@ export default {
                   uploadProps: {
                     accept: ".mp3,.ogg,.wav,.flac,.aac",
                     size: 102400,
-                    placeholder: "音频链接地址"
+                    placeholder: "音频链接地址",
                   },
                   formName: "audio0",
                   formData: {
-                    content: ""
+                    content: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传音频",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链音频",
                   desc: "支持mp3、ogg、wav、flac、aac",
                   formName: "audio1",
                   formData: {
-                    content: ""
+                    content: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -211,16 +228,16 @@ export default {
                         required: true,
                         message: "请输入有效音频链接",
                         trigger: "blur",
-                        pattern: /\.(mp3|ogg|wav|flac|aac)$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(mp3|ogg|wav|flac|aac)$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
-                return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls></audio></p>`;
-              }
-            }
+                return `<p class="el-tinymce-resource el-tinymce-audio"><audio src="${data.content}" controls style="${data.alignStyle}"></audio></p>`;
+              },
+            },
           },
           {
             type: "video",
@@ -232,8 +249,8 @@ export default {
                 uploadProps: {
                   accept: "image/*",
                   size: 10240,
-                  placeholder: "视频封面图片链接地址"
-                }
+                  placeholder: "视频封面图片链接地址",
+                },
               },
               tabs: [
                 {
@@ -242,24 +259,26 @@ export default {
                   uploadProps: {
                     accept: ".mp4,.webm",
                     size: 1048576,
-                    placeholder: "视频链接地址"
+                    placeholder: "视频链接地址",
                   },
                   formName: "video0",
                   formData: {
                     content: "",
                     width: "",
                     height: "",
-                    poster: ""
+                    poster: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
                       {
                         required: true,
                         message: "请上传视频",
-                        trigger: "blur"
-                      }
-                    ]
-                  }
+                        trigger: "blur",
+                      },
+                    ],
+                  },
                 },
                 {
                   title: "外链视频",
@@ -269,7 +288,9 @@ export default {
                     content: "",
                     width: "",
                     height: "",
-                    poster: ""
+                    poster: "",
+                    align: "",
+                    alignStyle: "",
                   },
                   formRules: {
                     content: [
@@ -277,29 +298,29 @@ export default {
                         required: true,
                         message: "请输入有效视频链接或代码",
                         trigger: "blur",
-                        pattern: /\.(mp4|webm)|<\/iframe>$/
-                      }
-                    ]
-                  }
-                }
+                        pattern: /\.(mp4|webm)|<\/iframe>$/,
+                      },
+                    ],
+                  },
+                },
               ],
               template(data) {
                 if (/\.(mp4|webm)$/.test(data.content)) {
-                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}"></video>`;
+                  data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></video>`;
                 }
                 return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
-              }
-            }
-          }
+              },
+            },
+          },
         ];
-      }
+      },
     },
     // 上传文件的方法
     upload: {
       required: true,
-      type: Function
-    }
-  }
+      type: Function,
+    },
+  },
 };
 </script>
 ```
@@ -319,17 +340,17 @@ export default {
 <script>
 function upload(option) {}
 const ElTinymce = () => {
-  return import("../../dist/el-tinymce.min").then(res => {
+  return import("../../dist/el-tinymce.min").then((res) => {
     Object.assign(res.props.upload, {
       required: false,
-      default: upload
+      default: upload,
     });
     return Promise.resolve(res);
   });
 };
 
 export default {
-  components: { ElTinymce }
+  components: { ElTinymce },
 };
 </script>
 ```
@@ -343,7 +364,7 @@ export default {
 import ElTinymce from "@panhezeng/el-tinymce";
 
 export default {
-  components: { ElTinymce }
+  components: { ElTinymce },
 };
 </script>
 ```
@@ -384,7 +405,7 @@ or
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/element-ui@~2/lib/theme-chalk/index.css"
 />
-<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js,npm/tinymce@~5/tinymce.min.js,npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
+<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js,npm/tinymce@%5E5.4.0/tinymce.min.js,npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
 ```
 
 ## 编译
