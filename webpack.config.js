@@ -20,8 +20,17 @@ module.exports = {
         use: "babel-loader",
       },
       {
-        test: /\.(css|less)$/,
-        use: ["vue-style-loader", "css-loader", "less-loader"],
+        test: /\.((c|le)ss)$/i,
+        use: [
+          "vue-style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              esModule: false,
+            },
+          },
+          "less-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)(\?.*)?$/,

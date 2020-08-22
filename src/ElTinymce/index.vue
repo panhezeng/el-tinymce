@@ -32,17 +32,17 @@ export default {
       type: String,
       required: true,
     },
-    // 触发content同步更新的tinymce Editor Events，其他https://www.tiny.cloud/docs/advanced/events/
+    // 触发 content 同步更新的 tinymce Editor Events，其他 https://www.tiny.cloud/docs/advanced/events/
     updateEvent: {
       type: String,
-      default: "beforeaddundo undo redo keyup",
+      default: "beforeaddundo undo redo keyup focusout",
     },
     // tinymce依赖文件的cdn url
     url: {
       type: String,
       default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.4.0",
     },
-    // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar3，可以使用该组件时写上 :config="{toolbar2:''}"
+    // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar2，可以使用该组件时写上 :config="{toolbar2:''}"
     config: {
       type: Object,
       default() {

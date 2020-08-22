@@ -275,8 +275,8 @@ const uploadProps = {
 };
 
 window.ElSingleUploadOptions = { upload: upload };
-require("../../../src");
-// require("../../../dist/el-tinymce.min");
+// require("../../../src");
+require("../../../dist/el-tinymce.min");
 // import { ElTinymce } from "../../../src";
 // const ElTinymce = () => {
 //   return import("../../../dist/el-tinymce.min").then(res => {
