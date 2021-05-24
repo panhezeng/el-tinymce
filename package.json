@@ -44,7 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@panhezeng/el-single-upload": "^3.0.2",
-    "@panhezeng/vue-tinymce": "^2.3.7"
+    "@panhezeng/vue-tinymce": "^2.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -56,8 +56,8 @@
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "latest",
     "css-loader": "^4.2.1",
-    "element-ui": "^2.13.2",
-    "eslint": "^7.7.0",
+    "element-ui": "^2.15.1",
+    "eslint": ">= 1.6.0 < 7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
@@ -67,7 +67,7 @@
     "less-loader": "^6.2.0",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "tinymce": "^5.4.2",
+    "tinymce": "5.8.1",
     "url-loader": "^4.1.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",
@@ -78,11 +78,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "peerDependencies": {
-    "vue": "^2.6.11",
-    "element-ui": "^2.13.2"
+    "element-ui": "^2.0.0",
+    "vue": "^2.6.0"
   },
   "engines": {
-    "node": ">=13",
+    "node": "~12",
     "npm": ">=6"
   },
   "private": false,

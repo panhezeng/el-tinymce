@@ -34,7 +34,7 @@ export default {
     // tinymce依赖文件的cdn url
     url: {
       type: String,
-      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.4.0",
+      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.8.1",
     },
     // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar3，可以使用该组件时写上 :config="{toolbar2:''}"
     config: {
@@ -405,7 +405,7 @@ or
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/element-ui@~2/lib/theme-chalk/index.css"
 />
-<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js,npm/tinymce@%5E5.4.0/tinymce.min.js,npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
+<script src="https://cdn.jsdelivr.net/combine/npm/vue@~2/dist/vue.min.js,npm/element-ui@~2/lib/index.js,npm/tinymce@%5E5.8.1/tinymce.min.js,npm/@panhezeng/el-tinymce@latest/dist/el-tinymce.min.js"></script>
 ```
 
 ## 编译

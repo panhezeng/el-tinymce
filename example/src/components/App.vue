@@ -7,7 +7,7 @@
     <!--      :i18n="i18n"-->
     <!--      :list="list"-->
     <!--      :content.sync="content"-->
-    <!--      url="https://unpkg.com/tinymce@%5E5.4.0"-->
+    <!--      url="https://unpkg.com/tinymce@%5E5.8.1"-->
     <!--    />-->
   </div>
 </template>
