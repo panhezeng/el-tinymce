@@ -39,6 +39,7 @@
                   prop="poster"
                   class="poster two-col"
                 >
+                  <div></div>
                   <el-single-upload
                     :url.sync="tab.formData.poster"
                     :upload="upload"
@@ -80,7 +81,6 @@
                     {{ i18n.align.title }}
                     <el-select
                       v-model="tab.formData.align"
-                      placeholder="请选择"
                       style="margin-left: 10px; width: 150px;"
                       @change="alignChange(tab.formData)"
                     >
@@ -253,7 +253,7 @@ export default {
                         required: true,
                         message: "请输入有效图片链接",
                         trigger: "blur",
-                        pattern: /\.(png|jpe?g|gif|svg|webp)$/,
+                        pattern: /\.(png|jpe?g|gif|svg|webp)$/i,
                       },
                     ],
                   },
@@ -309,7 +309,7 @@ export default {
                         required: true,
                         message: "请输入有效音频链接",
                         trigger: "blur",
-                        pattern: /\.(mp3|ogg|wav|flac|aac)$/,
+                        pattern: /\.(mp3|ogg|wav|flac|aac)$/i,
                       },
                     ],
                   },
@@ -379,14 +379,14 @@ export default {
                         required: true,
                         message: "请输入有效视频链接或代码",
                         trigger: "blur",
-                        pattern: /\.(mp4|webm)|<\/iframe>$/,
+                        pattern: /\.(mp4|webm)|<\/iframe>$/i,
                       },
                     ],
                   },
                 },
               ],
               template(data) {
-                if (/\.(mp4|webm)$/.test(data.content)) {
+                if (/\.(mp4|webm)$/i.test(data.content)) {
                   data.content = `<video controls src="${data.content}" poster="${data.poster}" width="${data.width}" height="${data.height}" style="${data.alignStyle}"></video>`;
                 }
                 return `<p class="el-tinymce-resource el-tinymce-video">${data.content}</p>`;
