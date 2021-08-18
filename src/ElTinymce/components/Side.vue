@@ -39,8 +39,13 @@
                   prop="poster"
                   class="poster two-col"
                 >
-                  <div></div>
+                  <component
+                    :is="uploadComp"
+                    v-if="uploadComp"
+                    :url.sync="tab.formData.poster"
+                  ></component>
                   <el-single-upload
+                    v-else
                     :url.sync="tab.formData.poster"
                     :upload="upload"
                     :readonly="true"
@@ -55,8 +60,13 @@
                     'two-col': tab.formData.hasOwnProperty('poster'),
                   }"
                 >
+                  <component
+                    :is="uploadComp"
+                    v-if="uploadComp"
+                    :url.sync="tab.formData.content"
+                  ></component>
                   <el-single-upload
-                    v-if="tab.uploadProps"
+                    v-else-if="tab.uploadProps"
                     :url.sync="tab.formData.content"
                     :upload="upload"
                     :readonly="true"
@@ -330,7 +340,7 @@ export default {
                 uploadProps: {
                   accept: "image/*",
                   size: 10240,
-                  placeholder: "视频封面图片链接地址",
+                  placeholder: "封面图片链接地址",
                 },
               },
               tabs: [
@@ -400,6 +410,10 @@ export default {
     upload: {
       required: true,
       type: Function,
+    },
+    uploadComp: {
+      type: null,
+      default: undefined,
     },
   },
   data() {

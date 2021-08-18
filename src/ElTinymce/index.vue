@@ -11,6 +11,7 @@
     <side
       v-if="!readonly"
       :upload="upload"
+      :upload-comp="uploadComp"
       :editor="editor"
       v-bind="$attrs"
       v-on="$listeners"
@@ -63,6 +64,10 @@ export default {
     upload: {
       required: true,
       type: Function,
+    },
+    uploadComp: {
+      type: null,
+      default: undefined,
     },
   },
   data() {
