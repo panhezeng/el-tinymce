@@ -43,6 +43,8 @@
                     :is="uploadComp"
                     v-if="uploadComp"
                     :url.sync="tab.formData.poster"
+                    :readonly="true"
+                    v-bind="item.dialog.poster.uploadProps"
                   ></component>
                   <el-single-upload
                     v-else
@@ -64,6 +66,8 @@
                     :is="uploadComp"
                     v-if="uploadComp"
                     :url.sync="tab.formData.content"
+                    :readonly="true"
+                    v-bind="tab.uploadProps"
                   ></component>
                   <el-single-upload
                     v-else-if="tab.uploadProps"
