@@ -35,7 +35,7 @@
               >
                 <el-form-item
                   v-if="tab.formData.hasOwnProperty('poster')"
-                  label=""
+                  :label="i18n.poster || '封面'"
                   prop="poster"
                   class="poster two-col"
                 >
@@ -55,7 +55,9 @@
                   />
                 </el-form-item>
                 <el-form-item
-                  label=""
+                  :label="
+                    tab.formData.hasOwnProperty('poster') ? item.title : ''
+                  "
                   prop="content"
                   class="upload"
                   :class="{
@@ -110,9 +112,9 @@
                   <div class="desc">{{ tab.desc }}</div>
                 </el-form-item>
                 <el-form-item class="btn">
-                  <el-button @click="reset(tab)">{{
-                    i18n.btn.reset
-                  }}</el-button>
+                  <el-button @click="reset(tab)"
+                    >{{ i18n.btn.reset }}
+                  </el-button>
                   <el-button
                     type="primary"
                     @click="
@@ -201,6 +203,7 @@ export default {
           },
           width: "宽",
           height: "高",
+          poster: "封面",
           align: {
             title: "排版方式",
             default: "默认",
@@ -525,12 +528,15 @@ export default {
   width: 140px;
   min-width: 140px;
   margin: 0 0 0 16px;
+
   .el-tinymce-assets-title {
     line-height: 39px;
   }
+
   .el-tinymce-assets-list {
     border: 1px solid #e7e7eb;
   }
+
   .el-tinymce-assets-item {
     border-top: 1px solid #e7e7eb;
     background-color: #fff;
@@ -538,6 +544,7 @@ export default {
     padding-left: 20px;
     line-height: 38px;
     cursor: pointer;
+
     &:hover {
       border: 1px solid #43b548;
       margin: 0 -1px -1px;
@@ -561,6 +568,7 @@ export default {
     .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 0 no-repeat;
     }
+
     &:hover .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 -106px no-repeat;
     }
@@ -570,6 +578,7 @@ export default {
     .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 -50px no-repeat;
     }
+
     &:hover .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 -156px no-repeat;
     }
@@ -579,6 +588,7 @@ export default {
     .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 -28px no-repeat;
     }
+
     &:hover .el-tinymce-assets-item-icon {
       background: url(../assets/img/el-tinymce-assets-icon.png) 0 -134px no-repeat;
     }
@@ -589,32 +599,38 @@ export default {
   .el-dialog__body {
     padding: 0 20px 30px;
   }
+
   .el-tabs__header {
     margin: 0 0 5px;
   }
+
   .desc {
     /*text-align: right;*/
-    text-align: center;
+    //text-align: center;
     color: #cccccc;
   }
 
   .width-height {
     margin-top: 10px;
+
     span {
       margin-right: 20px;
     }
+
     .el-input {
       width: 60px;
       margin-left: 10px;
     }
   }
+
   .align {
     margin-top: 10px;
   }
 
   .upload {
-    text-align: center;
+    //text-align: center;
   }
+
   .btn {
     width: 100%;
     text-align: right;
