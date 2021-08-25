@@ -638,13 +638,17 @@ export default {
   }
 
   .two-col {
-    width: calc(100% - 230px);
     display: inline-block;
     vertical-align: top;
+    &.upload {
+      width: calc(100% - 300px);
+      min-width: 230px;
+    }
   }
 
   .poster {
     width: 220px;
+    margin-right: 60px;
   }
 }
 </style>
