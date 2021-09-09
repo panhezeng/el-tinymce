@@ -71,17 +71,17 @@ module.exports = {
     ],
   },
   externals: {
-    "@panhezeng/vue-tinymce": {
-      commonjs: "@panhezeng/vue-tinymce",
-      commonjs2: "@panhezeng/vue-tinymce",
-      amd: "@panhezeng/vue-tinymce",
-      root: "VueTinymce",
-    },
     "@panhezeng/el-single-upload": {
       commonjs: "@panhezeng/el-single-upload",
       commonjs2: "@panhezeng/el-single-upload",
       amd: "@panhezeng/el-single-upload",
       root: "ElSingleUpload",
+    },
+    tinymce: {
+      commonjs: "tinymce",
+      commonjs2: "tinymce",
+      amd: "tinymce",
+      root: "tinymce",
     },
     vue: {
       commonjs: "vue",

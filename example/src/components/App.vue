@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
-    <el-tinymce :content.sync="content" @content-change="contentChange" />
-    <el-tinymce :content.sync="content" />
+    <el-tinymce
+      :content.sync="content"
+      :config="config"
+      @content-change="contentChange"
+    />
+    <el-tinymce :content.sync="content" :config="config" />
     <!--    <el-tinymce-->
     <!--      :i18n="i18n"-->
     <!--      :list="list"-->
@@ -300,6 +304,13 @@ export default {
       list,
       uploadProps,
       content: "",
+      content1: "",
+      content2: "",
+      config: {
+        init_instance_callback: (editor) => {
+          console.log(editor.id);
+        },
+      },
     };
   },
   methods: {
