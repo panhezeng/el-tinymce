@@ -88,53 +88,59 @@ export default {
     config: {
       immediate: true,
       deep: true,
-      handler: function () {
-        const tinymceConfig = {
-          min_height: this.height,
-          readonly: this.readonly,
-          menubar: "file edit view insert format tools table",
-          // menubar: false,
-          toolbar1:
-            "code | undo redo | fontsizeselect fontselect | blockquote hr | removeformat link unlink pastetext | pagebreak | charmap emoticons | fullscreen preview save print",
-        };
-        Object.assign(tinymceConfig, this.config);
-        tinymceConfig.init_instance_callback = (editor) => {
-          if (editor) {
-            // 获得初始化完成的编辑器实例
-            this.editor = editor;
-            this.setContent();
-            this.editor.on("NewBlock", (e) => {
-              // 光标在插入资源后回车时，NewBlock p元素会带上资源容器p的class，这里去掉，避免出现非预期的样式
-              const className = e.newBlock.getAttribute("class");
-              if (
-                /^\[object String\]$/.test(
-                  Object.prototype.toString.call(className)
-                ) &&
-                className.indexOf("el-tinymce-resource") > -1
-              ) {
-                e.newBlock.removeAttribute("class");
-              }
-            });
-            if (
-              /^\[object [^F]*Function\]$/.test(
-                Object.prototype.toString.call(
-                  this.config.init_instance_callback
-                )
-              )
-            ) {
-              this.config.init_instance_callback(editor);
-            }
-          }
-        };
-
-        this.configInternal = tinymceConfig;
-      },
+      handler: "setTinymceConfig",
+    },
+    height: {
+      immediate: true,
+      handler: "setTinymceConfig",
+    },
+    readonly: {
+      immediate: true,
+      handler: "setTinymceConfig",
     },
   },
   beforeDestroy() {
     this.editor = null;
   },
   methods: {
+    setTinymceConfig() {
+      const tinymceConfig = {
+        min_height: this.height,
+        readonly: this.readonly,
+        menubar: "file edit view insert format tools table",
+        // menubar: false,
+        toolbar1:
+          "code | undo redo | fontsizeselect fontselect | blockquote hr | removeformat link unlink pastetext | pagebreak | charmap emoticons | fullscreen preview save print",
+      };
+      Object.assign(tinymceConfig, this.config);
+      tinymceConfig.init_instance_callback = (editor) => {
+        if (editor) {
+          // 获得初始化完成的编辑器实例
+          this.editor = editor;
+          this.setContent();
+          this.editor.on("NewBlock", (e) => {
+            // 光标在插入资源后回车时，NewBlock p元素会带上资源容器p的class，这里去掉，避免出现非预期的样式
+            const className = e.newBlock.getAttribute("class");
+            if (
+              /^\[object String\]$/.test(
+                Object.prototype.toString.call(className)
+              ) &&
+              className.indexOf("el-tinymce-resource") > -1
+            ) {
+              e.newBlock.removeAttribute("class");
+            }
+          });
+          if (
+            /^\[object [^F]*Function\]$/.test(
+              Object.prototype.toString.call(this.config.init_instance_callback)
+            )
+          ) {
+            this.config.init_instance_callback(editor);
+          }
+        }
+      };
+      this.configInternal = tinymceConfig;
+    },
     setContent() {
       // 如果组件内容和父组件传入的内容不一样
       if (this.contentInternal !== this.content) {

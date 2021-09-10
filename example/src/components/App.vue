@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <h1>上传的mock演示，response永远是一样的数据</h1>
+    <el-button @click="changeProps()">测试改变 props</el-button>
     <el-tinymce
       :content.sync="content"
       :config="config"
+      :readonly="readonly"
       @content-change="contentChange"
     />
     <el-tinymce :content.sync="content" :config="config" />
@@ -303,19 +305,29 @@ export default {
       i18n,
       list,
       uploadProps,
-      content: "",
+      content: "111111111111",
       content1: "",
       content2: "",
       config: {
         init_instance_callback: (editor) => {
-          console.log(editor.id);
+          console.log(editor.id + ";;;;;;1");
         },
       },
+      readonly: false,
     };
   },
   methods: {
     contentChange(content) {
       console.log(content, "contentChange");
+    },
+    changeProps() {
+      this.content = "22222222222";
+      this.config = {
+        init_instance_callback: (editor) => {
+          console.log(editor.id + ";;;;;;2");
+        },
+      };
+      this.readonly = true;
     },
   },
 };
