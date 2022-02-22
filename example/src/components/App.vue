@@ -13,7 +13,7 @@
     <!--      :i18n="i18n"-->
     <!--      :list="list"-->
     <!--      :content.sync="content"-->
-    <!--      url="https://unpkg.com/tinymce@%5E5.8.1"-->
+    <!--      url="https://unpkg.com/tinymce@%5E5.10.3"-->
     <!--    />-->
   </div>
 </template>

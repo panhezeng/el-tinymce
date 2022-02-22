@@ -42,7 +42,7 @@ export default {
     // tinymce依赖文件的cdn url
     url: {
       type: String,
-      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.8.1",
+      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.10.3",
     },
     // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar2，可以使用该组件时写上 :config="{toolbar2:''}"
     config: {

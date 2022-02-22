@@ -1,4 +1,4 @@
-/node_modules/
+**/node_modules
 /coverage/
 
 # Mac
@@ -26,3 +26,4 @@ yarn.lock
 *.njsproj
 *.sln
 *.sw*
+/example/node_modules/

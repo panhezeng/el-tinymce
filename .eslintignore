@@ -3,3 +3,4 @@
 /static/**
 /coverage/**
 *.min.js
+**/node_modules

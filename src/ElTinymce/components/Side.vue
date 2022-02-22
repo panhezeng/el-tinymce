@@ -97,7 +97,7 @@
                     {{ i18n.align.title }}
                     <el-select
                       v-model="tab.formData.align"
-                      style="margin-left: 10px; width: 150px;"
+                      style="margin-left: 10px; width: 150px"
                       @change="alignChange(tab.formData)"
                     >
                       <el-option
