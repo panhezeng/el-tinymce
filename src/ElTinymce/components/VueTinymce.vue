@@ -116,7 +116,6 @@ export default {
           ) &&
           this.tinymceConfig.language === zhCN
         ) {
-
           this.tinymceConfig.language_url = `${cdnUrl}@panhezeng/vue-tinymce@latest/dist/langs/${this.tinymceConfig.language}.js`;
         }
 
@@ -167,11 +166,13 @@ export default {
             /\btext(indent|outdent)\b/g.test(this.tinymceConfig[key])
           ) {
             if (this.tinymceConfig.language === zhCN) {
-              this.tinymceConfig.external_plugins["textindentoutdentzhcn"] =
-                  `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/langs/zh_CN.js`;
+              this.tinymceConfig.external_plugins[
+                "textindentoutdentzhcn"
+              ] = `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/langs/zh_CN.js`;
             }
-            this.tinymceConfig.external_plugins["textindentoutdent"] =
-                `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/plugin.min.js`;
+            this.tinymceConfig.external_plugins[
+              "textindentoutdent"
+            ] = `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/plugin.min.js`;
             break;
           }
         }

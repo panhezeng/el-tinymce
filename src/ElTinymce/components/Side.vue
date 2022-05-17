@@ -64,20 +64,22 @@
                     'two-col': tab.formData.hasOwnProperty('poster'),
                   }"
                 >
-                  <component
-                    :is="uploadComp"
-                    v-if="uploadComp"
-                    :url.sync="tab.formData.content"
-                    :readonly="true"
-                    v-bind="tab.uploadProps"
-                  ></component>
-                  <el-single-upload
-                    v-else-if="tab.uploadProps"
-                    :url.sync="tab.formData.content"
-                    :upload="upload"
-                    :readonly="true"
-                    v-bind="tab.uploadProps"
-                  />
+                  <template v-if="tab.uploadProps">
+                    <component
+                      :is="uploadComp"
+                      v-if="uploadComp"
+                      :url.sync="tab.formData.content"
+                      :readonly="true"
+                      v-bind="tab.uploadProps"
+                    ></component>
+                    <el-single-upload
+                      v-else
+                      :url.sync="tab.formData.content"
+                      :upload="upload"
+                      :readonly="true"
+                      v-bind="tab.uploadProps"
+                    />
+                  </template>
                   <el-input v-else v-model="tab.formData.content" />
                   <div
                     v-if="tab.formData.hasOwnProperty('width')"
