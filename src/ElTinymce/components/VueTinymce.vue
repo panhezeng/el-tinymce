@@ -22,7 +22,7 @@ export default {
     // tinymce依赖文件的cdn url
     url: {
       type: String,
-      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.0.0",
+      default: "https://cdn.jsdelivr.net/npm/tinymce@%5E5.10.3",
     },
     // tinymce的init方法的config参数，本组件有默认设置，比如不要toolbar3，可以使用该组件时写上 :config="{toolbar2:''}"
     config: {
@@ -93,6 +93,10 @@ export default {
       // ============================================================================
       const zhCN = "zh_CN";
       const enUS = "en_US";
+      let cdnUrl = "https://cdn.jsdelivr.net/npm/";
+      if (/unpkg.com/.test(this.url)) {
+        cdnUrl = "https://unpkg.com/";
+      }
       // 如果配置为默认英语，则删除语言相关配置节点
       if (this.tinymceConfig.language === enUS) {
         delete this.tinymceConfig.language;
@@ -102,6 +106,7 @@ export default {
         if (!this.tinymceConfig.language) {
           this.tinymceConfig.language = zhCN;
         }
+
         // 如果没有配置 language_url ，并且是 zhCN ，则使用本项目的语言包
         if (
           !(
@@ -111,11 +116,8 @@ export default {
           ) &&
           this.tinymceConfig.language === zhCN
         ) {
-          let langCDN = "https://cdn.jsdelivr.net/npm/";
-          if (/unpkg.com/.test(this.url)) {
-            langCDN = "https://unpkg.com/";
-          }
-          this.tinymceConfig.language_url = `${langCDN}@panhezeng/vue-tinymce@latest/dist/langs/${this.tinymceConfig.language}.js`;
+
+          this.tinymceConfig.language_url = `${cdnUrl}@panhezeng/vue-tinymce@latest/dist/langs/${this.tinymceConfig.language}.js`;
         }
 
         // 如果没有配置 font_formats ，并且是 zhCN ，则使用内部配置
@@ -166,10 +168,10 @@ export default {
           ) {
             if (this.tinymceConfig.language === zhCN) {
               this.tinymceConfig.external_plugins["textindentoutdentzhcn"] =
-                "https://cdn.jsdelivr.net/npm/@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/langs/zh_CN.js";
+                  `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/langs/zh_CN.js`;
             }
             this.tinymceConfig.external_plugins["textindentoutdent"] =
-              "https://cdn.jsdelivr.net/npm/@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/plugin.min.js";
+                `${cdnUrl}@panhezeng/tinymce-plugin-text-indent-outdent@latest/dist/textindentoutdent/plugin.min.js`;
             break;
           }
         }
