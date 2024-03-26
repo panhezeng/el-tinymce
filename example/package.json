@@ -46,7 +46,7 @@
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "shelljs": "^0.8.4",
-    "tinymce": "5.10.9",
+    "tinymce": "7.0.0",
     "url-loader": "^4.1.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",
